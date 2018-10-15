@@ -7,13 +7,12 @@ In the previous labs, we joined the data from our separate files into a single D
 
 ## Objectives
 
-In this lesson, we will learn how to:
+You will be able to:
 
 * Cast columns to the appropriate data types
 * Identify and deal with null values appropriately
 * Remove unnecessary columns
-* Check for and deal with multicollinearity
-* Normalize our data
+* Understand how to normalize data
 
 
 ### Getting Started
