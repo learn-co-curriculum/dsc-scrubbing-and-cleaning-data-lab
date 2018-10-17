@@ -15,7 +15,7 @@ You will be able to:
 * Understand how to normalize data
 
 
-### Getting Started
+## Getting Started
 
 You'll find the resulting dataset from our work in the _Obtaining Data_ Lab stored within the file `walmart_data_not_cleaned.csv`.  
 
@@ -199,7 +199,7 @@ ________________________________________________________________________________
 
 We should begin by checking for the most common problems--columns not correctly encoded as the proper data type (e.g. numeric columns stored as strings), null values, etc.  We'll also want to consider things such as data normalization for our numeric columns, since numeric columns with different scales can have a negative effect on our results during the modeling stages.  We'll also need to deal with our categorical columns by one-hot encoding them, as well as checking for columns that should be removed because they don't contain useful information.  Finally, we'll also want to check for multicollinearity by determining if we have columns that are highly correlated.  
 
-### Dealing with Oversized Datasets
+## Dealing with Oversized Datasets
 
 This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that we're not bogged down by large runtimes. Let's investigate the dataset a bit to get a feel for if this is a good idea. 
 
@@ -219,7 +219,7 @@ len(df)
 
 This dataset contains `421570` rows! That's large enough that we should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and we'll likely have to fit out model multiple times as we tweak it--by subsetting our dataset, we'll protect ourselves from insane runtimes everytime we make a small change and need to rerun our model. Once we have a prototype built, we can always add all the extra data back in!
 
-#### Subsetting our Dataset
+### Subsetting our Dataset
 
 The typical method for subsetting our dataset is to just take a random sample of data.  This is an option for us.  However, when we inspect the columns of our dataset in a bit, we'll notice that we have 2 categorical columns with very high cardinality--`Store`, and `Dept`.  This provides us with an opportunity to reduce dimensionality while subsampling.  Instead of building a model on all the stores and departments in our dataset, we'll subset our data so that it only contains stores 1 through 10.  
 
@@ -242,13 +242,13 @@ len(df)
 
 
 
-### Starting our Data Cleaning
+## Starting our Data Cleaning
 
 We'll begin by dealing with the most obvious issues--data types and null values. 
 
 First, we'll check the different types of encoding that each column has, and then we'll check for null values and examine our options for dealing with them.
 
-#### Checking Data Types
+### Checking Data Types
 
 In the cell below, use the appropriate method to check the data type of each column. 
 
@@ -278,7 +278,7 @@ df.info()
     Unemployment    97839 non-null float64
     dtypes: bool(1), float64(10), int64(3), object(2)
     memory usage: 12.0+ MB
-    
+
 
 Let's investigate the unique values inside of the `Store` and `Dept` columns.
 
@@ -292,7 +292,7 @@ df.Store.unique()
 
 
 
-    array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10], dtype=int64)
+    array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
 
 
 
@@ -308,11 +308,11 @@ df.Dept.unique()
            19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
            36, 37, 38, 40, 41, 42, 44, 45, 46, 47, 48, 49, 51, 52, 54, 55, 56,
            58, 59, 60, 67, 71, 72, 74, 79, 80, 81, 82, 83, 85, 87, 90, 91, 92,
-           93, 94, 95, 97, 98, 78, 96, 99, 77, 39, 50], dtype=int64)
+           93, 94, 95, 97, 98, 78, 96, 99, 77, 39, 50])
 
 
 
-#### Categorical Data Stored as Integers
+### Categorical Data Stored as Integers
 
 A common issue we usually check for at this stage is numeric columns that have accidentally been encoded as strings.  However, in this dataset, we'll notice that although the `Store` and `Dept` columns are both contain integer values, we can intuit that these are meant to be read as categorical data.  We'll want to convert these columns to strings, so that they will be one-hot encoded when we get around to dealing with our categorical columns.  
 
@@ -326,7 +326,7 @@ df.Store = df.Store.astype("str")
 df.Dept = df.Dept.astype("str")
 ```
 
-#### Numeric Data Stored as Strings
+### Numeric Data Stored as Strings
 
 It looks like we have two columns that are encoded as strings (remember, pandas denotes string columns as `object`)--`Date` and `Type`.
 
@@ -376,9 +376,9 @@ df.info()
     Unemployment    97839 non-null float64
     dtypes: bool(1), float64(10), int64(1), object(4)
     memory usage: 12.0+ MB
-    
 
-#### Detecting and Dealing With Null Values
+
+### Detecting and Dealing With Null Values
 
  Next, we'll need to check for null values. How we deal with the null values will be determined by the columns containing them, and how many null values exist in each.  
  
@@ -588,7 +588,7 @@ Okay--let's examine what we know about these columns, and come up with a solutio
 * There is extremely high variance in each, with the standard deviation being larger than the mean in all 5 columns. 
 
 
-#### Dealing With Null Values Through Binning
+### Dealing With Null Values Through Binning
 
 This suggests that our best bet is to bin the columns.  The hard part is figuring out the right amount of bins to use.  Too many, and we subject ourselves to the curse of dimensionality.  Too few, and we lose information from the columns that could be important. 
 
@@ -735,7 +735,7 @@ df.isna().sum()
 
 
 
-### Checking for Multicollinearity
+## Checking for Multicollinearity
 
 
 Before we one-hot encode our categorical columns, we'll want to quickly check the dataset for multicollinearity, since this can really mess up our model if it exists in the dataset.  We want to make sure that the columns within the dataset are not highly correlated. 
@@ -772,12 +772,12 @@ sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2792472a6d8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a1b3cafd0>
 
 
 
 
-![png](output_40_1.png)
+![png](index_files/index_40_1.png)
 
 
 Interpret the Correlation Heatmap we created above to answer the following questions:
@@ -790,7 +790,7 @@ ________________________________________________________________________________
 Size is most highly correlated with our target variable, weekly sales.  This makes sense, as large stores are going to serve more customers, and will therefore have higher sales.  There is some small amount of correlation  amongst our predictors, but not enough that we need to worry about removing anything.  
 
 
-### Normalizing our Data
+## Normalizing our Data
 
 Now, we'll need to convert all of our numeric columns to the same scale by **_normalizing_** our dataset.  Recall that we normalize our dataset by converting each numeric value to it's corresponding z-score for the column, which is obtained by subtracting the column's mean and then dividing by the column's standard deviation for every value. 
 
@@ -809,7 +809,7 @@ df.CPI = (df.CPI - df.CPI.mean()) / df.CPI.std()
 df.Unemployment = (df.Unemployment - df.Unemployment.mean()) / df.Unemployment.std()
 ```
 
-### One-Hot Encoding Categorical Columns
+## One-Hot Encoding Categorical Columns
 
 For our final step, we'll need to deal with our categorical columns.  Categorical data work work for our modeling step--we'll need to convert these to numeric columns through **_one-hot encoding_**.  
 
@@ -1004,7 +1004,7 @@ df.to_csv("walmart_dataset_cleaned.csv", index=False)
 
 That's it! We've now successfully scrubbed our dataset--we're now ready for data exploration and modeling.
 
-# Conclusion
+## Conclusion
 
 In this lesson, we learned gain practice with data cleaning by:
 
