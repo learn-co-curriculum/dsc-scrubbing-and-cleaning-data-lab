@@ -15,7 +15,7 @@ You will be able to:
 * Understand how to normalize data
 
 
-### Getting Started
+## Getting Started
 
 You'll find the resulting dataset from our work in the _Obtaining Data_ Lab stored within the file `walmart_data_not_cleaned.csv`.  
 
@@ -52,7 +52,7 @@ ________________________________________________________________________________
 
  
 
-### Dealing with Oversized Datasets
+## Dealing with Oversized Datasets
 
 This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that we're not bogged down by large runtimes. Let's investigate the dataset a bit to get a feel for if this is a good idea. 
 
@@ -60,7 +60,7 @@ In the cell below, check how many rows this dataset contains.
 
 This dataset contains `421570` rows! That's large enough that we should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and we'll likely have to fit out model multiple times as we tweak it--by subsetting our dataset, we'll protect ourselves from insane runtimes everytime we make a small change and need to rerun our model. Once we have a prototype built, we can always add all the extra data back in!
 
-#### Subsetting our Dataset
+### Subsetting our Dataset
 
 The typical method for subsetting our dataset is to just take a random sample of data.  This is an option for us.  However, when we inspect the columns of our dataset in a bit, we'll notice that we have 2 categorical columns with very high cardinality--`Store`, and `Dept`.  This provides us with an opportunity to reduce dimensionality while subsampling.  Instead of building a model on all the stores and departments in our dataset, we'll subset our data so that it only contains stores 1 through 10.  
 
@@ -76,13 +76,13 @@ df = None
 len(df)
 ```
 
-### Starting our Data Cleaning
+## Starting our Data Cleaning
 
 We'll begin by dealing with the most obvious issues--data types and null values. 
 
 First, we'll check the different types of encoding that each column has, and then we'll check for null values and examine our options for dealing with them.
 
-#### Checking Data Types
+### Checking Data Types
 
 In the cell below, use the appropriate method to check the data type of each column. 
 
@@ -90,7 +90,7 @@ Let's investigate the unique values inside of the `Store` and `Dept` columns.
 
 In the cells below, use the appropriate DataFrame method to display all the unique values in the `Store` column, and in the `Dept` column. 
 
-#### Categorical Data Stored as Integers
+### Categorical Data Stored as Integers
 
 A common issue we usually check for at this stage is numeric columns that have accidentally been encoded as strings.  However, in this dataset, we'll notice that although the `Store` and `Dept` columns are both contain integer values, we can intuit that these are meant to be read as categorical data.  We'll want to convert these columns to strings, so that they will be one-hot encoded when we get around to dealing with our categorical columns.  
 
@@ -98,7 +98,7 @@ You may be wondering why we don't just leave it as is.  This is because we would
 
 In the cell below, cast the `Store` and `Dept` columns to strings. 
 
-#### Numeric Data Stored as Strings
+### Numeric Data Stored as Strings
 
 It looks like we have two columns that are encoded as strings (remember, pandas denotes string columns as `object`)--`Date` and `Type`.
 
@@ -110,7 +110,7 @@ Great job--the `Type` column is clearly a categorical column, and should current
 
 Let's double check the column encodings one more time to make sure that everything we did above worked correctly. 
 
-#### Detecting and Dealing With Null Values
+### Detecting and Dealing With Null Values
 
  Next, we'll need to check for null values. How we deal with the null values will be determined by the columns containing them, and how many null values exist in each.  
  
@@ -134,7 +134,7 @@ Okay--let's examine what we know about these columns, and come up with a solutio
 * There is extremely high variance in each, with the standard deviation being larger than the mean in all 5 columns. 
 
 
-#### Dealing With Null Values Through Binning
+### Dealing With Null Values Through Binning
 
 This suggests that our best bet is to bin the columns.  The hard part is figuring out the right amount of bins to use.  Too many, and we subject ourselves to the curse of dimensionality.  Too few, and we lose information from the columns that could be important. 
 
@@ -232,7 +232,7 @@ ________________________________________________________________________________
 
 
 
-### Normalizing our Data
+## Normalizing our Data
 
 Now, we'll need to convert all of our numeric columns to the same scale by **_normalizing_** our dataset.  Recall that we normalize our dataset by converting each numeric value to it's corresponding z-score for the column, which is obtained by subtracting the column's mean and then dividing by the column's standard deviation for every value. 
 
@@ -251,7 +251,7 @@ df.CPI = None
 df.Unemployment = None
 ```
 
-### One-Hot Encoding Categorical Columns
+## One-Hot Encoding Categorical Columns
 
 For our final step, we'll need to deal with our categorical columns.  Categorical data work work for our modeling step--we'll need to convert these to numeric columns through **_one-hot encoding_**.  
 
@@ -269,7 +269,7 @@ df.head()
 
 That's it! We've now successfully scrubbed our dataset--we're now ready for data exploration and modeling.
 
-# Conclusion
+## Conclusion
 
 In this lesson, we learned gain practice with data cleaning by:
 
