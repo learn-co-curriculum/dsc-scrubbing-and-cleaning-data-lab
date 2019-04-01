@@ -1,9 +1,9 @@
 
-# Scrubbing Our Data - Lab
+# Scrubbing and Cleaning Data - Lab
 
 ## Introduction
 
-In the previous labs, we joined the data from our separate files into a single DataFrame.  In this lab, we'll scrub the data to get it ready for exploration and modeling!
+In the previous labs, you joined the data from our separate files into a single DataFrame.  In this lab, you'll scrub the data to get it ready for exploration and modeling!
 
 ## Objectives
 
@@ -41,24 +41,16 @@ In the cells below:
 df = None
 ```
 
-Great! Everything looks just like we left it as.  Now, we can begin cleaning the data. 
+Great! Everything looks just like we left it as.  Now, you can begin cleaning the data. 
 
-Before we jump right into data cleaning,. we'll want to consider our process first.  Answer the following questions below:
-
-What sorts of problems should we be checking for?  Are there any obvious issues that we'll need to deal with? What are some other issues that this dataset could contain that might not be immediately obvious?  
-
-Write your answer below this line:
-________________________________________________________________________________________________________________________________
-
- 
 
 ## Dealing with Oversized Datasets
 
-This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that we're not bogged down by large runtimes. Let's investigate the dataset a bit to get a feel for if this is a good idea. 
+This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that you're not bogged down by large runtimes. 
 
 In the cell below, check how many rows this dataset contains.
 
-This dataset contains `421570` rows! That's large enough that we should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and we'll likely have to fit out model multiple times as we tweak it--by subsetting our dataset, we'll protect ourselves from insane runtimes everytime we make a small change and need to rerun our model. Once we have a prototype built, we can always add all the extra data back in!
+This dataset contains `421570` rows! That's large enough that you should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and you'll likely have to fit out model multiple times as you tweak it--by subsetting the dataset, you'll protect yourself from insane runtimes everytime you make a small change and need to rerun the model. Once you have a prototype built, you can always add all the extra data back in!
 
 ### Subsetting our Dataset
 
