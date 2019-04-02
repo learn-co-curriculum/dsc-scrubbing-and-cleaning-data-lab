@@ -768,7 +768,7 @@ ________________________________________________________________________________
 
 
 
-## Normalizing our Data
+## Normalizing the Data
 
 Now, you'll need to convert all of our numeric columns to the same scale by **_normalizing_** our dataset.  Recall that you normalize a dataset by converting each numeric value to it's corresponding z-score for the column, which is obtained by subtracting the column's mean and then dividing by the column's standard deviation for every value. 
 
