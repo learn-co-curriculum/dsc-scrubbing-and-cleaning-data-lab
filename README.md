@@ -1,9 +1,9 @@
 
-# Scrubbing Our Data - Lab
+# Scrubbing and Cleaning Data - Lab
 
 ## Introduction
 
-In the previous labs, we joined the data from our separate files into a single DataFrame.  In this lab, we'll scrub the data to get it ready for exploration and modeling!
+In the previous labs, you joined the data from our separate files into a single DataFrame.  In this lab, you'll scrub the data to get it ready for exploration and modeling!
 
 ## Objectives
 
@@ -23,9 +23,9 @@ In the cells below:
 
 * Import pandas and set the standard alias
 * Import numpy and set the standard alias
-* Import matlotlib.pyplot and set the standard alias
+* Import matplotlib.pyplot and set the standard alias
 * Import seaborn and set the alias `sns` (this is the standard alias for seaborn)
-* Use the ipython magic command to set all matplotlib visualizations to display inline in the the notebook
+* Use the ipython magic command to set all matplotlib visualizations to display inline in the notebook
 * Load the dataset stored in the .csv file into a DataFrame using pandas
 * Inspect the head of the DataFrame to ensure everything loaded correctly
 
@@ -187,21 +187,12 @@ df.head()
 
 
 
-Great! Everything looks just like we left it as.  Now, we can begin cleaning the data. 
+Great! Everything looks just like we left it as.  Now, you can begin cleaning the data. 
 
-Before we jump right into data cleaning,. we'll want to consider our process first.  Answer the following questions below:
-
-What sorts of problems should we be checking for?  Are there any obvious issues that we'll need to deal with? What are some other issues that this dataset could contain that might not be immediately obvious?  
-
-Write your answer below this line:
-________________________________________________________________________________________________________________________________
-
-
-We should begin by checking for the most common problems--columns not correctly encoded as the proper data type (e.g. numeric columns stored as strings), null values, etc.  We'll also want to consider things such as data normalization for our numeric columns, since numeric columns with different scales can have a negative effect on our results during the modeling stages.  We'll also need to deal with our categorical columns by one-hot encoding them, as well as checking for columns that should be removed because they don't contain useful information.  Finally, we'll also want to check for multicollinearity by determining if we have columns that are highly correlated.  
 
 ## Dealing with Oversized Datasets
 
-This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that we're not bogged down by large runtimes. Let's investigate the dataset a bit to get a feel for if this is a good idea. 
+This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that you're not bogged down by large runtimes. 
 
 In the cell below, check how many rows this dataset contains.
 
@@ -217,7 +208,7 @@ len(df)
 
 
 
-This dataset contains `421570` rows! That's large enough that we should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and we'll likely have to fit out model multiple times as we tweak it--by subsetting our dataset, we'll protect ourselves from insane runtimes everytime we make a small change and need to rerun our model. Once we have a prototype built, we can always add all the extra data back in!
+This dataset contains `421570` rows! That's large enough that you should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and you'll likely have to fit out model multiple times as you tweak it--by subsetting the dataset, you'll protect yourself from insane runtimes every time you make a small change and need to rerun the model. Once you have a prototype built, you can always add all the extra data back in!
 
 ### Subsetting our Dataset
 
@@ -244,9 +235,7 @@ len(df)
 
 ## Starting our Data Cleaning
 
-We'll begin by dealing with the most obvious issues--data types and null values. 
-
-First, we'll check the different types of encoding that each column has, and then we'll check for null values and examine our options for dealing with them.
+To start, you'll deal with the most obvious issue: data features with the wrong data encoding.
 
 ### Checking Data Types
 
@@ -280,9 +269,9 @@ df.info()
     memory usage: 12.0+ MB
 
 
-Let's investigate the unique values inside of the `Store` and `Dept` columns.
+Now, investigate the unique values inside of the `Store` and `Dept` columns.
 
-In the cells below, use the appropriate DataFrame method to display all the unique values in the `Store` column, and in the `Dept` column. 
+In the cells below, use the appropriate DataFrame method to display all the unique values in the `Store` column, and in the `Dept` column.
 
 
 ```python
@@ -314,9 +303,7 @@ df.Dept.unique()
 
 ### Categorical Data Stored as Integers
 
-A common issue we usually check for at this stage is numeric columns that have accidentally been encoded as strings.  However, in this dataset, we'll notice that although the `Store` and `Dept` columns are both contain integer values, we can intuit that these are meant to be read as categorical data.  We'll want to convert these columns to strings, so that they will be one-hot encoded when we get around to dealing with our categorical columns.  
-
-You may be wondering why we don't just leave it as is.  This is because we would accidentally be creating numeric relationships between the different stores that shouldn't be there.  If left with numeric encoding, our model would interpret Store 2 as twice Store 1, but half of Store 4.  These sorts of mathematical relationships don't make sense--we'd much rather these be treated as categories, as the dataset intends.  
+A common issue to check for at this stage is numeric columns that have accidentally been encoded as strings.  However, in this dataset, you should notice that although the `Store` and `Dept` columns are both encoded as integer values, they are categorical data representing specific stores or departments.  As such, you'll want to convert these columns to strings, so that you can then use the `pd.get_dummies()` method to create binary dummy variables. This representation, binary dummy variables, is the most appropriate encoding mechanism for categorical data when then feeding the dataset into many machine learning algorithms such as simple linear regression. If left with numeric encoding, a model would interpret Store 2 as twice Store 1 and half of Store 4.  These sorts of mathematical relationships don't make sense when integers are used to as identifiers for categories.  
 
 In the cell below, cast the `Store` and `Dept` columns to strings. 
 
@@ -328,9 +315,9 @@ df.Dept = df.Dept.astype("str")
 
 ### Numeric Data Stored as Strings
 
-It looks like we have two columns that are encoded as strings (remember, pandas denotes string columns as `object`)--`Date` and `Type`.
+It looks like there are two columns that are already encoded as strings (remember, pandas denotes string columns as `object`)--`Date` and `Type`.
 
-We don't need to worry about `Date`--those should obviously be encoded as strings. Let's quickly check out the `Type` column just to ensure that it doesn't contain numeric data.
+For now, don't worry about `Date`. Quickly check out the `Type` column just to ensure that it doesn't contain numeric data.
 
 In the cell below, get the unique values contained within the `Type` column. 
 
@@ -346,9 +333,9 @@ df.Type.unique()
 
 
 
-Great job--the `Type` column is clearly a categorical column, and should currently be stored as a string.  Once we've dealt with null values, we'll deal with this and other categorical columns by one-hot encoding them. 
+Great job--the `Type` column is clearly a categorical column. You'll first need to deal with the null values but can then use the `pd.get_dummies()` again.
 
-Let's double check the column encodings one more time to make sure that everything we did above worked correctly. 
+Double check the column encodings again as a sanity check to make sure that everything you did above is reflected in the dataset.
 
 
 ```python
@@ -380,9 +367,9 @@ df.info()
 
 ### Detecting and Dealing With Null Values
 
- Next, we'll need to check for null values. How we deal with the null values will be determined by the columns containing them, and how many null values exist in each.  
+Next, it's time to check for null values. How to deal with the null values will be determined by the columns containing them, and how many null values exist in each.  
  
- In the cell below, use the appropriate pandas functionality to get a count of how many null values exist in each column in our DataFrame. 
+In the cell below, get a count of how many null values exist in each column in the DataFrame. 
 
 
 ```python
@@ -412,14 +399,7 @@ df.isna().sum()
 
 
 
-**_QUESTION:_** Interpret the output above.  Do we know enough to have a strategy for dealing with these null values yet? Is dropping the rows a valid solution?  How about dropping the columns?  Can we replace them with interpolation, treat them as a categorical value, or deal with them through binning?  
-
-Write your answer below this line:
-________________________________________________________________________________
-
-We do not yet have enough information to determine the best course of action for dealing with null values, since we haven't investigated examples of the data actually contained within the `MarkDown` columns that contain all the null values.  Since over 300,000 rows contain null values, dropping the rows is not a valid solution, since we would lose the majority of our data.  Dropping the markdown columns is also not an ideal solution, as they likely contain good information that will be useful in our modeling steps.  We need to investigate examples of what non-null data in these columns to determine if how we should bin the data, but binning and converting the columns to categorical so that we can one-hot encode them is probably the most useful solution here.  
-
-Let's investigate these columns further.  In the cell below, get the top 20 value counts contained within `MarkDown3`.
+  
 
 
 ```python
@@ -494,7 +474,7 @@ df["MarkDown3"].value_counts()
 
 
 
-Now, let's get the descriptive statistics for each of the markdown columns. We want to see where the minimum and maximum values lie.  
+Now, get some descriptive statistics for each of the columns. You want to see where the minimum and maximum values lie.  
 
 
 ```python
@@ -581,7 +561,7 @@ display(df["MarkDown5"].describe())
     Name: MarkDown5, dtype: float64
 
 
-Okay--let's examine what we know about these columns, and come up with a solution for dealing with these null values. 
+Now that you have a bit more of a understanding of each of these features you can now make an informed decision about the best strategy for dealing with the various null values. 
 
 * The data contained within each column are continuously-valued floats. 
 * The range is quite large, with the smallest value being around 0 or even negative in some columns, and the max being greater than 100,000.
@@ -590,14 +570,13 @@ Okay--let's examine what we know about these columns, and come up with a solutio
 
 ### Dealing With Null Values Through Binning
 
-This suggests that our best bet is to bin the columns.  The hard part is figuring out the right amount of bins to use.  Too many, and we subject ourselves to the curse of dimensionality.  Too few, and we lose information from the columns that could be important. 
-
-For now, let's start with with 5 bins of equal size. 
+This suggests that the best bet is to bin the columns.
+For now, start with with 5 bins of equal size. 
 
 In the cell below: 
 
-* Create a binned version of each `MarkDown` column and add them to our DataFrame.  
-* When calling `pd.cut()`, pass in the appropriate column as the object to be binned, the number of bins we want, `5`, and set the `labels` parameter to `bins`, so that we have clearly labeled names for each bin. 
+* Create a binned version of each `MarkDown` column and add them to the DataFrame.  
+* When calling `pd.cut()`, pass in the appropriate column as the object to be binned, the number of bins we want, `5`, and set the `labels` parameter to `bins`, so that you have clearly labeled names for each bin. 
 
 For more information on how to bin these columns using pd.cut, see the [pandas documentation for this method.](https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.cut.html)
 
@@ -609,7 +588,7 @@ for i in range (1, 6):
     df["binned_markdown_" + str(i)] = pd.cut(df["MarkDown" + str(i)], 5, labels=bins)
 ```
 
-Great! Now, let's check the `.dtypes` attribute of our DataFrame to see that these new categorical columns have been created. 
+Great! Now, check the `.dtypes` attribute of the DataFrame to see that these new categorical columns have been created. 
 
 
 ```python
@@ -644,7 +623,7 @@ df.dtypes
 
 
 
-They exist! However, they still contain null values.  We need to replace all null values with a string that will represent all missing values.  This is easy enough for us--we can just use the `replace()` method or the `fillna()` method on each column and replace `NaN` with `"NaN"`. 
+They exist! However, they still contain null values.  You need to replace all null values with a string that will represent all missing values.  Use the `replace()` method or the `fillna()` method on each column and replace `NaN` with `"NaN"`. 
 
 In the cell below, replace all missing values inside our `binned_markdown` columns with the string `"NaN"`.
 
@@ -656,7 +635,7 @@ for i in range (1,6):
     df["binned_markdown_" + str(i)].replace(np.NaN, "NaN", inplace=True)
 ```
 
-Great! Now, let's check if those columns still contain null values. 
+Great! Now, check if those columns still contain null values. 
 
 In the cell below, display the number of null values contained within each column of our DataFrame.
 
@@ -693,16 +672,16 @@ df.isna().sum()
 
 
 
-Excellent! We've now dealt with all the null values in our dataset through **_Coarse Classification_** by binning our data and treating null values as a distinct category. All that's left to do is to drop our original `MarkDown` columns from the DataFrame. 
+Excellent! You've now dealt with all the null values in the dataset through **_Coarse Classification_** by binning the data and treating null values as a distinct category. All that's left to do is to drop our original `MarkDown` columns from the DataFrame. 
 
-Note that in this step, we'll also drop the `Date` column, because we are going to build a generalized model and will not be making use of any time series data. 
+Note that in this step, you'll also drop the `Date` column, because you are going to build a generalized model and will not be making use of any time series data. 
 
 In the cell below:
 
-* Create a list called `to_drop` that contains the name of every `MarkDown` column we need to drop (for a challenge, try doing this with a list comprehension!)
+* Create a list called `to_drop` that contains the name of every `MarkDown` column you need to drop (for a challenge, try doing this with a list comprehension!)
 * Append `"Date"` to `to_drop`
-* Drop these columns (in place) from our DataFrame
-* Display the number of null values in each column again to confirm that these columns have been dropped, and that our DataFrame now contains no missing values
+* Drop these columns (in place) from the DataFrame
+* Display the number of null values in each column again to confirm that these columns have been dropped, and that the DataFrame now contains no missing values
 
 
 
@@ -735,16 +714,16 @@ df.isna().sum()
 
 
 
-## Checking for Multicollinearity
+### Checking for Multicollinearity
 
 
-Before we one-hot encode our categorical columns, we'll want to quickly check the dataset for multicollinearity, since this can really mess up our model if it exists in the dataset.  We want to make sure that the columns within the dataset are not highly correlated. 
+Before you one-hot encode the categorical columns usin `pd.get_dummies()`, you'll want to quickly check the dataset for multicollinearity, since this can severly impact model stability and interpretability.  You want to make sure that the columns within the dataset are not highly correlated. 
 
-We'll do this by creating a correlation heatmap. We want to do this before one-hot-encoding our data because each column becomes both a row and a column in the visualization, and after one-hot encoding, this dataset will contain over 300 columns!
+A good way to check for multicollinearity between features is to create a correlation heatmap.
 
-The [seaborn documentation](https://seaborn.pydata.org/examples/many_pairwise_correlations.html) provides some great code samples to help us figure out how to display a Correlation Heatmap.  
+The [seaborn documentation](https://seaborn.pydata.org/examples/many_pairwise_correlations.html) provides some great code samples to help you figure out how to display a Correlation Heatmap.  
 
-Check out this documentation, and then modify the code included so that it displays a Correlation Heatmap for our dataset below.
+Check out this documentation, and then modify the code included below so that it displays a Correlation Heatmap for your dataset below.
 
 
 ```python
@@ -780,21 +759,20 @@ sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
 ![png](index_files/index_40_1.png)
 
 
-Interpret the Correlation Heatmap we created above to answer the following questions:
+Interpret the Correlation Heatmap you created above to answer the following questions:
 
 Which columns are highly correlated with the target column our model will predict?  Are any of our predictor columns highly correlated enough that we should consider dropping them?  Explain your answer.
 
 Write your answer below this line:
 ________________________________________________________________________________________________________________________________
 
-Size is most highly correlated with our target variable, weekly sales.  This makes sense, as large stores are going to serve more customers, and will therefore have higher sales.  There is some small amount of correlation  amongst our predictors, but not enough that we need to worry about removing anything.  
 
 
 ## Normalizing our Data
 
-Now, we'll need to convert all of our numeric columns to the same scale by **_normalizing_** our dataset.  Recall that we normalize our dataset by converting each numeric value to it's corresponding z-score for the column, which is obtained by subtracting the column's mean and then dividing by the column's standard deviation for every value. 
+Now, you'll need to convert all of our numeric columns to the same scale by **_normalizing_** our dataset.  Recall that you normalize a dataset by converting each numeric value to it's corresponding z-score for the column, which is obtained by subtracting the column's mean and then dividing by the column's standard deviation for every value. 
 
-Since we only have 4 columns containing numeric data that needs to be normalized, we'll do this by hand in the cell below. This allows us to avoid errors that stem from trying to normalize datasets that contain strings in all of our categorical columns. Plus, it's good practice to help us remember how normalization works!
+Since you only have 4 columns containing numeric data that needs to be normalized, you can do this by hand in the cell below. This avoids errors that stem from trying to normalize datasets that contain strings in all of our categorical columns. Plus, it's good practice to help remember how normalization works!
 
 In the cell below:
 
@@ -811,9 +789,9 @@ df.Unemployment = (df.Unemployment - df.Unemployment.mean()) / df.Unemployment.s
 
 ## One-Hot Encoding Categorical Columns
 
-For our final step, we'll need to deal with our categorical columns.  Categorical data work work for our modeling step--we'll need to convert these to numeric columns through **_one-hot encoding_**.  
+As a final step, you'll need to deal with the categorical columns by **_one-hot encoding_** them into binary variables via the `pd.get_dummies()` method.  
 
-In the cell below, use the [appropriate function in pandas](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) to one-hot encode the dataset.
+In the cell below, use the [`pd.get_dummies()`](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) to one-hot encode the dataset.
 
 
 ```python
@@ -1002,14 +980,14 @@ df.head()
 df.to_csv("walmart_dataset_cleaned.csv", index=False)
 ```
 
-That's it! We've now successfully scrubbed our dataset--we're now ready for data exploration and modeling.
+That's it! You've now successfully scrubbed your dataset--you're now ready for data exploration and modeling!
 
-## Conclusion
+## Summary
 
-In this lesson, we learned gain practice with data cleaning by:
+In this lesson, you learned gain practice with data cleaning by:
 
 * Casting columns to the appropriate data types
 * Identifying and deal with null values appropriately
 * Removing unnecessary columns
 * Checking for and deal with multicollinearity
-* Normalizing our data
+* Normalizing your data
