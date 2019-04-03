@@ -32,41 +32,151 @@ In the cells below:
 
 ```python
 # Import statements go here
-
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
 ```
 
 
 ```python
 # Now, load in the dataset and inspect the head to make sure everything loaded correctly
-df = None
-```
-
-Great! Everything looks just like we left it as.  Now, you can begin cleaning the data. 
-
-
-## Dealing with Oversized Datasets
-
-This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that you're not bogged down by large runtimes. 
-
-In the cell below, check how many rows this dataset contains.
-
-This dataset contains `421570` rows! That's large enough that you should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and you'll likely have to fit out model multiple times as you tweak it--by subsetting the dataset, you'll protect yourself from insane runtimes every time you make a small change and need to rerun the model. Once you have a prototype built, you can always add all the extra data back in!
-
-### Subsetting our Dataset
-
-The typical method for subsetting our dataset is to just take a random sample of data.  This is an option for us.  However, when we inspect the columns of our dataset in a bit, we'll notice that we have 2 categorical columns with very high cardinality--`Store`, and `Dept`.  This provides us with an opportunity to reduce dimensionality while subsampling.  Instead of building a model on all the stores and departments in our dataset, we'll subset our data so that it only contains stores 1 through 10.  
-
-In the cell below, slice our dataset so that only rows with a `Store` value between 1 and 10 (inclusive) remain. 
-
-
-```python
-df = None
+df = pd.read_csv('Lego_data_merged.csv')
+df.head()
 ```
 
 
-```python
-len(df)
-```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prod_id</th>
+      <th>ages</th>
+      <th>piece_count</th>
+      <th>set_name</th>
+      <th>prod_desc</th>
+      <th>prod_long_desc</th>
+      <th>theme_name</th>
+      <th>country</th>
+      <th>list_price</th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>review_difficulty</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>75823</td>
+      <td>6-12</td>
+      <td>277</td>
+      <td>Bird Island Egg Heist</td>
+      <td>Catapult into action and take back the eggs fr...</td>
+      <td>Use the staircase catapult to launch Red into ...</td>
+      <td>Angry Birds™</td>
+      <td>US</td>
+      <td>$29.99</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>Average</td>
+      <td>4.5</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>75822</td>
+      <td>6-12</td>
+      <td>168</td>
+      <td>Piggy Plane Attack</td>
+      <td>Launch a flying attack and rescue the eggs fro...</td>
+      <td>Pilot Pig has taken off from Bird Island with ...</td>
+      <td>Angry Birds™</td>
+      <td>US</td>
+      <td>$19.99</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>Easy</td>
+      <td>5.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>75821</td>
+      <td>6-12</td>
+      <td>74</td>
+      <td>Piggy Car Escape</td>
+      <td>Chase the piggy with lightning-fast Chuck and ...</td>
+      <td>Pitch speedy bird Chuck against the Piggy Car....</td>
+      <td>Angry Birds™</td>
+      <td>US</td>
+      <td>$12.99</td>
+      <td>11.0</td>
+      <td>4.3</td>
+      <td>Easy</td>
+      <td>4.3</td>
+      <td>4.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>21030</td>
+      <td>12+</td>
+      <td>1032</td>
+      <td>United States Capitol Building</td>
+      <td>Explore the architecture of the United States ...</td>
+      <td>Discover the architectural secrets of the icon...</td>
+      <td>Architecture</td>
+      <td>US</td>
+      <td>$99.99</td>
+      <td>23.0</td>
+      <td>3.6</td>
+      <td>Average</td>
+      <td>4.6</td>
+      <td>4.3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21035</td>
+      <td>12+</td>
+      <td>744</td>
+      <td>Solomon R. Guggenheim Museum®</td>
+      <td>Recreate the Solomon R. Guggenheim Museum® wit...</td>
+      <td>Discover the architectural secrets of Frank Ll...</td>
+      <td>Architecture</td>
+      <td>US</td>
+      <td>$79.99</td>
+      <td>14.0</td>
+      <td>3.2</td>
+      <td>Challenging</td>
+      <td>4.6</td>
+      <td>4.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+ 
+
+  
 
 ## Starting our Data Cleaning
 
@@ -76,27 +186,74 @@ To start, you'll deal with the most obvious issue: data features with the wrong 
 
 In the cell below, use the appropriate method to check the data type of each column. 
 
-Now, investigate the unique values inside of the `Store` and `Dept` columns.
 
-In the cells below, use the appropriate DataFrame method to display all the unique values in the `Store` column, and in the `Dept` column.
+```python
+df.info()
+```
 
-### Categorical Data Stored as Integers
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 10870 entries, 0 to 10869
+    Data columns (total 14 columns):
+    prod_id              10870 non-null int64
+    ages                 10870 non-null object
+    piece_count          10870 non-null int64
+    set_name             10870 non-null object
+    prod_desc            10512 non-null object
+    prod_long_desc       10870 non-null object
+    theme_name           10870 non-null object
+    country              10870 non-null object
+    list_price           10870 non-null object
+    num_reviews          9449 non-null float64
+    play_star_rating     9321 non-null float64
+    review_difficulty    9104 non-null object
+    star_rating          9449 non-null float64
+    val_star_rating      9301 non-null float64
+    dtypes: float64(4), int64(2), object(8)
+    memory usage: 1.2+ MB
 
-A common issue to check for at this stage is numeric columns that have accidentally been encoded as strings.  However, in this dataset, you should notice that although the `Store` and `Dept` columns are both encoded as integer values, they are categorical data representing specific stores or departments.  As such, you'll want to convert these columns to strings, so that you can then use the `pd.get_dummies()` method to create binary dummy variables. This representation, binary dummy variables, is the most appropriate encoding mechanism for categorical data when then feeding the dataset into many machine learning algorithms such as simple linear regression. If left with numeric encoding, a model would interpret Store 2 as twice Store 1 and half of Store 4.  These sorts of mathematical relationships don't make sense when integers are used to as identifiers for categories.  
 
-In the cell below, cast the `Store` and `Dept` columns to strings. 
+Now, investigate some of the unique values inside of the `list_price` column.
 
-### Numeric Data Stored as Strings
 
-It looks like there are two columns that are already encoded as strings (remember, pandas denotes string columns as `object`)--`Date` and `Type`.
+```python
+df.list_price.value_counts()[:5]
+```
 
-For now, don't worry about `Date`. Quickly check out the `Type` column just to ensure that it doesn't contain numeric data.
 
-In the cell below, get the unique values contained within the `Type` column. 
 
-Great job--the `Type` column is clearly a categorical column. You'll first need to deal with the null values but can then use the `pd.get_dummies()` again.
 
-Double check the column encodings again as a sanity check to make sure that everything you did above is reflected in the dataset.
+    $24.3878    565
+    $36.5878    520
+    $12.1878    515
+    $18.2878    304
+    $42.6878    234
+    Name: list_price, dtype: int64
+
+
+
+### Numerical Data Stored as Strings
+
+A common issue to check for at this stage is numeric columns that have accidentally been encoded as strings. For example, you should notice that the `list_price` column above is currently formatted as a string and contains a proceeding '$'. Remove this and convert the remaining number to a `float` so that you can later model this value. After all, your primary task is to generate model to predict the price.
+
+> Note: While the data spans a multitude of countries, assume for now that all prices have been standardized to USD.
+
+
+```python
+#Your code here; extract the list_price as a floating number
+df.list_price = df.list_price.map(lambda x : float(x[1:]))
+df.list_price.unique()[:5]
+```
+
+
+
+
+    array([29.99, 19.99, 12.99, 99.99, 79.99])
+
+
+
+ 
+
+ 
 
 ### Detecting and Dealing With Null Values
 
@@ -104,9 +261,148 @@ Next, it's time to check for null values. How to deal with the null values will 
  
 In the cell below, get a count of how many null values exist in each column in the DataFrame. 
 
+
+```python
+df.info() #Same as checking the type above
+```
+
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 10870 entries, 0 to 10869
+    Data columns (total 14 columns):
+    prod_id              10870 non-null int64
+    ages                 10870 non-null object
+    piece_count          10870 non-null int64
+    set_name             10870 non-null object
+    prod_desc            10512 non-null object
+    prod_long_desc       10870 non-null object
+    theme_name           10870 non-null object
+    country              10870 non-null object
+    list_price           10870 non-null float64
+    num_reviews          9449 non-null float64
+    play_star_rating     9321 non-null float64
+    review_difficulty    9104 non-null object
+    star_rating          9449 non-null float64
+    val_star_rating      9301 non-null float64
+    dtypes: float64(5), int64(2), object(7)
+    memory usage: 1.2+ MB
+
+
   
 
 Now, get some descriptive statistics for each of the columns. You want to see where the minimum and maximum values lie.  
+
+
+```python
+df.describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prod_id</th>
+      <th>piece_count</th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1.087000e+04</td>
+      <td>10870.000000</td>
+      <td>9449.000000</td>
+      <td>9321.000000</td>
+      <td>9449.000000</td>
+      <td>9301.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.181634e+04</td>
+      <td>503.936431</td>
+      <td>17.813737</td>
+      <td>4.355413</td>
+      <td>4.510319</td>
+      <td>4.214439</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.736390e+05</td>
+      <td>831.209318</td>
+      <td>38.166693</td>
+      <td>0.617272</td>
+      <td>0.516463</td>
+      <td>0.670906</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>6.300000e+02</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.800000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.112300e+04</td>
+      <td>97.000000</td>
+      <td>2.000000</td>
+      <td>4.000000</td>
+      <td>4.300000</td>
+      <td>4.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>4.207350e+04</td>
+      <td>223.000000</td>
+      <td>6.000000</td>
+      <td>4.500000</td>
+      <td>4.600000</td>
+      <td>4.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7.124800e+04</td>
+      <td>556.000000</td>
+      <td>14.000000</td>
+      <td>4.800000</td>
+      <td>5.000000</td>
+      <td>4.700000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.000431e+06</td>
+      <td>7541.000000</td>
+      <td>367.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 Now that you have a bit more of a understanding of each of these features you can now make an informed decision about the best strategy for dealing with the various null values. 
 
