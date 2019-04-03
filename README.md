@@ -187,14 +187,7 @@ df.head()
 
 
 
-Great! Everything looks just like we left it as.  Now, you can begin cleaning the data. 
-
-
-## Dealing with Oversized Datasets
-
-This dataset is quite large. Often, when starting out on a project, its a good idea to build the model on a subset of the data so that you're not bogged down by large runtimes. 
-
-In the cell below, check how many rows this dataset contains.
+ 
 
 
 ```python
@@ -208,13 +201,7 @@ len(df)
 
 
 
-This dataset contains `421570` rows! That's large enough that you should consider building our model on a subset of the data to increase our speed during the modeling step.  Modeling is an iterative process, and you'll likely have to fit out model multiple times as you tweak it--by subsetting the dataset, you'll protect yourself from insane runtimes every time you make a small change and need to rerun the model. Once you have a prototype built, you can always add all the extra data back in!
-
-### Subsetting our Dataset
-
-The typical method for subsetting our dataset is to just take a random sample of data.  This is an option for us.  However, when we inspect the columns of our dataset in a bit, we'll notice that we have 2 categorical columns with very high cardinality--`Store`, and `Dept`.  This provides us with an opportunity to reduce dimensionality while subsampling.  Instead of building a model on all the stores and departments in our dataset, we'll subset our data so that it only contains stores 1 through 10.  
-
-In the cell below, slice our dataset so that only rows with a `Store` value between 1 and 10 (inclusive) remain. 
+  
 
 
 ```python
@@ -269,9 +256,7 @@ df.info()
     memory usage: 12.0+ MB
 
 
-Now, investigate the unique values inside of the `Store` and `Dept` columns.
-
-In the cells below, use the appropriate DataFrame method to display all the unique values in the `Store` column, and in the `Dept` column.
+Now, investigate some of the unique values inside of the `list_price` column.
 
 
 ```python
@@ -301,11 +286,11 @@ df.Dept.unique()
 
 
 
-### Categorical Data Stored as Integers
+### Numerical Data Stored as Strings
 
-A common issue to check for at this stage is numeric columns that have accidentally been encoded as strings.  However, in this dataset, you should notice that although the `Store` and `Dept` columns are both encoded as integer values, they are categorical data representing specific stores or departments.  As such, you'll want to convert these columns to strings, so that you can then use the `pd.get_dummies()` method to create binary dummy variables. This representation, binary dummy variables, is the most appropriate encoding mechanism for categorical data when then feeding the dataset into many machine learning algorithms such as simple linear regression. If left with numeric encoding, a model would interpret Store 2 as twice Store 1 and half of Store 4.  These sorts of mathematical relationships don't make sense when integers are used to as identifiers for categories.  
+A common issue to check for at this stage is numeric columns that have accidentally been encoded as strings. For example, you should notice that the `list_price` column above is currently formatted as a string and contains a proceeding '$'. Remove this and convert the remaining number to a `float` so that you can later model this value. After all, your primary task is to generate model to predict the price.
 
-In the cell below, cast the `Store` and `Dept` columns to strings. 
+> Note: While the data spans a multitude of countries, assume for now that all prices have been standardized to USD.
 
 
 ```python
@@ -313,13 +298,7 @@ df.Store = df.Store.astype("str")
 df.Dept = df.Dept.astype("str")
 ```
 
-### Numeric Data Stored as Strings
-
-It looks like there are two columns that are already encoded as strings (remember, pandas denotes string columns as `object`)--`Date` and `Type`.
-
-For now, don't worry about `Date`. Quickly check out the `Type` column just to ensure that it doesn't contain numeric data.
-
-In the cell below, get the unique values contained within the `Type` column. 
+ 
 
 
 ```python
@@ -333,9 +312,7 @@ df.Type.unique()
 
 
 
-Great job--the `Type` column is clearly a categorical column. You'll first need to deal with the null values but can then use the `pd.get_dummies()` again.
-
-Double check the column encodings again as a sanity check to make sure that everything you did above is reflected in the dataset.
+ 
 
 
 ```python
