@@ -42,7 +42,7 @@ import matplotlib.pyplot as plt
 
 ```python
 # Now, load in the dataset and inspect the head to make sure everything loaded correctly
-df = pd.read_csv("walmart_data_not_cleaned.csv")
+df = pd.read_csv("Lego_data_merged.csv")
 df.head()
 ```
 
@@ -67,119 +67,107 @@ df.head()
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Store</th>
-      <th>Dept</th>
-      <th>Date</th>
-      <th>Weekly_Sales</th>
-      <th>IsHoliday</th>
-      <th>Type</th>
-      <th>Size</th>
-      <th>Temperature</th>
-      <th>Fuel_Price</th>
-      <th>MarkDown1</th>
-      <th>MarkDown2</th>
-      <th>MarkDown3</th>
-      <th>MarkDown4</th>
-      <th>MarkDown5</th>
-      <th>CPI</th>
-      <th>Unemployment</th>
+      <th>prod_id</th>
+      <th>ages</th>
+      <th>piece_count</th>
+      <th>set_name</th>
+      <th>prod_desc</th>
+      <th>prod_long_desc</th>
+      <th>theme_name</th>
+      <th>country</th>
+      <th>list_price</th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>review_difficulty</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>1</td>
-      <td>2010-02-05</td>
-      <td>24924.50</td>
-      <td>False</td>
-      <td>A</td>
-      <td>151315</td>
-      <td>42.31</td>
-      <td>2.572</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>211.096358</td>
-      <td>8.106</td>
+      <td>75823</td>
+      <td>6-12</td>
+      <td>277</td>
+      <td>Bird Island Egg Heist</td>
+      <td>Catapult into action and take back the eggs fr...</td>
+      <td>Use the staircase catapult to launch Red into ...</td>
+      <td>Angry Birds™</td>
+      <td>US</td>
+      <td>$29.99</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>Average</td>
+      <td>4.5</td>
+      <td>4.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
-      <td>2</td>
-      <td>2010-02-05</td>
-      <td>50605.27</td>
-      <td>False</td>
-      <td>A</td>
-      <td>151315</td>
-      <td>42.31</td>
-      <td>2.572</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>211.096358</td>
-      <td>8.106</td>
+      <td>75822</td>
+      <td>6-12</td>
+      <td>168</td>
+      <td>Piggy Plane Attack</td>
+      <td>Launch a flying attack and rescue the eggs fro...</td>
+      <td>Pilot Pig has taken off from Bird Island with ...</td>
+      <td>Angry Birds™</td>
+      <td>US</td>
+      <td>$19.99</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>Easy</td>
+      <td>5.0</td>
+      <td>4.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1</td>
-      <td>3</td>
-      <td>2010-02-05</td>
-      <td>13740.12</td>
-      <td>False</td>
-      <td>A</td>
-      <td>151315</td>
-      <td>42.31</td>
-      <td>2.572</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>211.096358</td>
-      <td>8.106</td>
+      <td>75821</td>
+      <td>6-12</td>
+      <td>74</td>
+      <td>Piggy Car Escape</td>
+      <td>Chase the piggy with lightning-fast Chuck and ...</td>
+      <td>Pitch speedy bird Chuck against the Piggy Car....</td>
+      <td>Angry Birds™</td>
+      <td>US</td>
+      <td>$12.99</td>
+      <td>11.0</td>
+      <td>4.3</td>
+      <td>Easy</td>
+      <td>4.3</td>
+      <td>4.1</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1</td>
-      <td>4</td>
-      <td>2010-02-05</td>
-      <td>39954.04</td>
-      <td>False</td>
-      <td>A</td>
-      <td>151315</td>
-      <td>42.31</td>
-      <td>2.572</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>211.096358</td>
-      <td>8.106</td>
+      <td>21030</td>
+      <td>12+</td>
+      <td>1032</td>
+      <td>United States Capitol Building</td>
+      <td>Explore the architecture of the United States ...</td>
+      <td>Discover the architectural secrets of the icon...</td>
+      <td>Architecture</td>
+      <td>US</td>
+      <td>$99.99</td>
+      <td>23.0</td>
+      <td>3.6</td>
+      <td>Average</td>
+      <td>4.6</td>
+      <td>4.3</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1</td>
-      <td>5</td>
-      <td>2010-02-05</td>
-      <td>32229.38</td>
-      <td>False</td>
-      <td>A</td>
-      <td>151315</td>
-      <td>42.31</td>
-      <td>2.572</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>211.096358</td>
-      <td>8.106</td>
+      <td>21035</td>
+      <td>12+</td>
+      <td>744</td>
+      <td>Solomon R. Guggenheim Museum®</td>
+      <td>Recreate the Solomon R. Guggenheim Museum® wit...</td>
+      <td>Discover the architectural secrets of Frank Ll...</td>
+      <td>Architecture</td>
+      <td>US</td>
+      <td>$79.99</td>
+      <td>14.0</td>
+      <td>3.2</td>
+      <td>Challenging</td>
+      <td>4.6</td>
+      <td>4.1</td>
     </tr>
   </tbody>
 </table>
@@ -197,28 +185,11 @@ len(df)
 
 
 
-    421570
+    10870
 
 
 
   
-
-
-```python
-df = df[df["Store"] <= 10]
-```
-
-
-```python
-len(df)
-```
-
-
-
-
-    97839
-
-
 
 ## Starting our Data Cleaning
 
@@ -234,55 +205,37 @@ df.info()
 ```
 
     <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 97839 entries, 0 to 97838
-    Data columns (total 16 columns):
-    Store           97839 non-null int64
-    Dept            97839 non-null int64
-    Date            97839 non-null object
-    Weekly_Sales    97839 non-null float64
-    IsHoliday       97839 non-null bool
-    Type            97839 non-null object
-    Size            97839 non-null int64
-    Temperature     97839 non-null float64
-    Fuel_Price      97839 non-null float64
-    MarkDown1       35013 non-null float64
-    MarkDown2       27232 non-null float64
-    MarkDown3       32513 non-null float64
-    MarkDown4       34485 non-null float64
-    MarkDown5       35013 non-null float64
-    CPI             97839 non-null float64
-    Unemployment    97839 non-null float64
-    dtypes: bool(1), float64(10), int64(3), object(2)
-    memory usage: 12.0+ MB
+    RangeIndex: 10870 entries, 0 to 10869
+    Data columns (total 14 columns):
+    prod_id              10870 non-null int64
+    ages                 10870 non-null object
+    piece_count          10870 non-null int64
+    set_name             10870 non-null object
+    prod_desc            10512 non-null object
+    prod_long_desc       10870 non-null object
+    theme_name           10870 non-null object
+    country              10870 non-null object
+    list_price           10870 non-null object
+    num_reviews          9449 non-null float64
+    play_star_rating     9321 non-null float64
+    review_difficulty    9104 non-null object
+    star_rating          9449 non-null float64
+    val_star_rating      9301 non-null float64
+    dtypes: float64(4), int64(2), object(8)
+    memory usage: 1.2+ MB
 
 
 Now, investigate some of the unique values inside of the `list_price` column.
 
 
 ```python
-df.Store.unique()
+df.list_price.unique()[:5]
 ```
 
 
 
 
-    array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
-
-
-
-
-```python
-df.Dept.unique()
-```
-
-
-
-
-    array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 16, 17, 18,
-           19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
-           36, 37, 38, 40, 41, 42, 44, 45, 46, 47, 48, 49, 51, 52, 54, 55, 56,
-           58, 59, 60, 67, 71, 72, 74, 79, 80, 81, 82, 83, 85, 87, 90, 91, 92,
-           93, 94, 95, 97, 98, 78, 96, 99, 77, 39, 50])
+    array(['$29.99', '$19.99', '$12.99', '$99.99', '$79.99'], dtype=object)
 
 
 
@@ -294,52 +247,47 @@ A common issue to check for at this stage is numeric columns that have accidenta
 
 
 ```python
-df.Store = df.Store.astype("str")
-df.Dept = df.Dept.astype("str")
-```
-
- 
-
-
-```python
-df.Type.unique()
+df.list_price = df.list_price.map(lambda x: float(x.replace('$', ''))) #Strip the $ sign and convert to float
+#Could also potentially take advantage of str indexing but this would be less flexible and prone to potential errors /
+#if the data is not consistently formatted
+df.list_price.unique()[:5]
 ```
 
 
 
 
-    array(['A', 'B'], dtype=object)
+    array([29.99, 19.99, 12.99, 99.99, 79.99])
 
 
 
  
 
+ 
+
 
 ```python
-df.info()
+df.info() #Note that list_price is now a float object
 ```
 
     <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 97839 entries, 0 to 97838
-    Data columns (total 16 columns):
-    Store           97839 non-null object
-    Dept            97839 non-null object
-    Date            97839 non-null object
-    Weekly_Sales    97839 non-null float64
-    IsHoliday       97839 non-null bool
-    Type            97839 non-null object
-    Size            97839 non-null int64
-    Temperature     97839 non-null float64
-    Fuel_Price      97839 non-null float64
-    MarkDown1       35013 non-null float64
-    MarkDown2       27232 non-null float64
-    MarkDown3       32513 non-null float64
-    MarkDown4       34485 non-null float64
-    MarkDown5       35013 non-null float64
-    CPI             97839 non-null float64
-    Unemployment    97839 non-null float64
-    dtypes: bool(1), float64(10), int64(1), object(4)
-    memory usage: 12.0+ MB
+    RangeIndex: 10870 entries, 0 to 10869
+    Data columns (total 14 columns):
+    prod_id              10870 non-null int64
+    ages                 10870 non-null object
+    piece_count          10870 non-null int64
+    set_name             10870 non-null object
+    prod_desc            10512 non-null object
+    prod_long_desc       10870 non-null object
+    theme_name           10870 non-null object
+    country              10870 non-null object
+    list_price           10870 non-null float64
+    num_reviews          9449 non-null float64
+    play_star_rating     9321 non-null float64
+    review_difficulty    9104 non-null object
+    star_rating          9449 non-null float64
+    val_star_rating      9301 non-null float64
+    dtypes: float64(5), int64(2), object(7)
+    memory usage: 1.2+ MB
 
 
 ### Detecting and Dealing With Null Values
@@ -350,398 +298,247 @@ In the cell below, get a count of how many null values exist in each column in t
 
 
 ```python
-df.isna().sum()
+df.isna().sum() #Could also simply recheck df.info() above which states the number of non-null entries
 ```
 
 
 
 
-    Store               0
-    Dept                0
-    Date                0
-    Weekly_Sales        0
-    IsHoliday           0
-    Type                0
-    Size                0
-    Temperature         0
-    Fuel_Price          0
-    MarkDown1       62826
-    MarkDown2       70607
-    MarkDown3       65326
-    MarkDown4       63354
-    MarkDown5       62826
-    CPI                 0
-    Unemployment        0
+    prod_id                 0
+    ages                    0
+    piece_count             0
+    set_name                0
+    prod_desc             358
+    prod_long_desc          0
+    theme_name              0
+    country                 0
+    list_price              0
+    num_reviews          1421
+    play_star_rating     1549
+    review_difficulty    1766
+    star_rating          1421
+    val_star_rating      1569
     dtype: int64
 
 
 
   
 
-
-```python
-df["MarkDown3"].value_counts()
-```
-
-
-
-
-    3.00     403
-    1.00     331
-    6.00     277
-    1.65     217
-    2.97     208
-    2.00     197
-    2.02     197
-    0.55     193
-    10.80    145
-    8.11     145
-    24.60    144
-    4.20     141
-    4.26     140
-    6.50     140
-    3.20     137
-    0.22     136
-    1.88     136
-    6.01     135
-    17.36    134
-    0.25     134
-    7.50     133
-    3.39     133
-    0.50     133
-    0.60     132
-    2.20     132
-    3.72     130
-    4.00     128
-    0.24     127
-    3.01     127
-    1.71     126
-            ... 
-    0.51      62
-    22.74     62
-    1.04      62
-    6.48      62
-    24.70     62
-    41.58     62
-    0.68      62
-    5.85      62
-    2.46      62
-    0.70      62
-    4.54      62
-    50.03     62
-    4.46      62
-    30.92     62
-    1.40      62
-    10.00     62
-    30.18     62
-    65.34     62
-    42.75     61
-    13.00     61
-    10.75     61
-    1.80      61
-    8.08      61
-    0.36      61
-    52.06     61
-    12.00     61
-    6.02      61
-    9.61      61
-    68.00     61
-    2.31      60
-    Name: MarkDown3, Length: 425, dtype: int64
-
-
-
 Now, get some descriptive statistics for each of the columns. You want to see where the minimum and maximum values lie.  
 
 
 ```python
-display(df["MarkDown1"].describe())
+df.describe()
 ```
 
 
-    count    35013.000000
-    mean      7048.166982
-    std       7656.783543
-    min         35.940000
-    25%       2639.050000
-    50%       5126.540000
-    75%       8813.810000
-    max      75149.790000
-    Name: MarkDown1, dtype: float64
 
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-```python
-display(df["MarkDown2"].describe())
-```
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prod_id</th>
+      <th>piece_count</th>
+      <th>list_price</th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1.087000e+04</td>
+      <td>10870.000000</td>
+      <td>10870.000000</td>
+      <td>9449.000000</td>
+      <td>9321.000000</td>
+      <td>9449.000000</td>
+      <td>9301.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.181634e+04</td>
+      <td>503.936431</td>
+      <td>67.309137</td>
+      <td>17.813737</td>
+      <td>4.355413</td>
+      <td>4.510319</td>
+      <td>4.214439</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.736390e+05</td>
+      <td>831.209318</td>
+      <td>94.669414</td>
+      <td>38.166693</td>
+      <td>0.617272</td>
+      <td>0.516463</td>
+      <td>0.670906</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>6.300000e+02</td>
+      <td>1.000000</td>
+      <td>2.272400</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.800000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.112300e+04</td>
+      <td>97.000000</td>
+      <td>21.899000</td>
+      <td>2.000000</td>
+      <td>4.000000</td>
+      <td>4.300000</td>
+      <td>4.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>4.207350e+04</td>
+      <td>223.000000</td>
+      <td>36.587800</td>
+      <td>6.000000</td>
+      <td>4.500000</td>
+      <td>4.600000</td>
+      <td>4.300000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7.124800e+04</td>
+      <td>556.000000</td>
+      <td>73.187800</td>
+      <td>14.000000</td>
+      <td>4.800000</td>
+      <td>5.000000</td>
+      <td>4.700000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.000431e+06</td>
+      <td>7541.000000</td>
+      <td>1104.870000</td>
+      <td>367.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-    count     27232.000000
-    mean       3210.994407
-    std       10683.244951
-    min         -10.980000
-    25%          24.030000
-    50%         148.950000
-    75%        1555.570000
-    max      104519.540000
-    Name: MarkDown2, dtype: float64
-
-
-
-```python
-display(df["MarkDown3"].describe())
-```
-
-
-    count     32513.000000
-    mean       1553.120097
-    std       10595.395278
-    min           0.010000
-    25%           4.530000
-    50%          21.120000
-    75%          96.350000
-    max      141630.610000
-    Name: MarkDown3, dtype: float64
-
-
-
-```python
-display(df["MarkDown4"].describe())
-```
-
-
-    count    34485.000000
-    mean      2934.328386
-    std       5199.795541
-    min          4.000000
-    25%        426.510000
-    50%       1183.640000
-    75%       3463.030000
-    max      48159.860000
-    Name: MarkDown4, dtype: float64
-
-
-
-```python
-display(df["MarkDown5"].describe())
-```
-
-
-    count    35013.000000
-    mean      4706.398300
-    std       5347.922707
-    min        135.160000
-    25%       2007.500000
-    50%       3592.820000
-    75%       5630.400000
-    max      58068.140000
-    Name: MarkDown5, dtype: float64
 
 
 Now that you have a bit more of a understanding of each of these features you can now make an informed decision about the best strategy for dealing with the various null values. 
 
-* The data contained within each column are continuously-valued floats. 
-* The range is quite large, with the smallest value being around 0 or even negative in some columns, and the max being greater than 100,000.
-* There is extremely high variance in each, with the standard deviation being larger than the mean in all 5 columns. 
+Some common strategies for filling null values include:
+* Using the mean of the feature
+* Using the median of the feature
+* Inserting a random value from a normal distribution with the mean and std of the feature
+* Binning
 
-
-### Dealing With Null Values Through Binning
-
-This suggests that the best bet is to bin the columns.
-For now, start with with 5 bins of equal size. 
-
-In the cell below: 
-
-* Create a binned version of each `MarkDown` column and add them to the DataFrame.  
-* When calling `pd.cut()`, pass in the appropriate column as the object to be binned, the number of bins we want, `5`, and set the `labels` parameter to `bins`, so that you have clearly labeled names for each bin. 
-
-For more information on how to bin these columns using pd.cut, see the [pandas documentation for this method.](https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.cut.html)
+Given that most of the features with null values concern user reviews of the lego set, it is reasonable to wonder whether there is strong correlation between these features in the first place. Before proceeding, take a minute to investigate this hypothesis.
 
 
 ```python
-bins = ['0-20%', '21-40%', '41-60%', '61-80%', '81-100%']
-
-for i in range (1, 6):
-    df["binned_markdown_" + str(i)] = pd.cut(df["MarkDown" + str(i)], 5, labels=bins)
-```
-
-Great! Now, check the `.dtypes` attribute of the DataFrame to see that these new categorical columns have been created. 
-
-
-```python
-df.dtypes
+import itertools
 ```
 
 
-
-
-    Store                  object
-    Dept                   object
-    Date                   object
-    Weekly_Sales          float64
-    IsHoliday                bool
-    Type                   object
-    Size                    int64
-    Temperature           float64
-    Fuel_Price            float64
-    MarkDown1             float64
-    MarkDown2             float64
-    MarkDown3             float64
-    MarkDown4             float64
-    MarkDown5             float64
-    CPI                   float64
-    Unemployment          float64
-    binned_markdown_1    category
-    binned_markdown_2    category
-    binned_markdown_3    category
-    binned_markdown_4    category
-    binned_markdown_5    category
-    dtype: object
-
-
-
-They exist! However, they still contain null values.  You need to replace all null values with a string that will represent all missing values.  Use the `replace()` method or the `fillna()` method on each column and replace `NaN` with `"NaN"`. 
-
-In the cell below, replace all missing values inside our `binned_markdown` columns with the string `"NaN"`.
-
-**_NOTE:_** If you're unsure of how to do this, check the [pandas documentation for replace](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.replace.html).
-
-
 ```python
-for i in range (1,6):
-    df["binned_markdown_" + str(i)].replace(np.NaN, "NaN", inplace=True)
+#Investigate whether multicollinearity exists between the review features 
+#(num_reviews, play_star_rating, star_rating, val_star_rating)
+for combo in itertools.combinations(feats, 2):
+    x = combo[0]
+    y = combo[1]
+    temp = df[(~df[x].isnull())&(~df[y].isnull())]
+    corr = round(np.corrcoef(temp[x],temp[y])[0][1], 2)
+    print("Correlation between {} and {}: {}".format(x,y, corr))
 ```
 
-Great! Now, check if those columns still contain null values. 
+    Correlation between num_reviews and play_star_rating: -0.06
+    Correlation between num_reviews and star_rating: 0.0
+    Correlation between num_reviews and val_star_rating: 0.03
+    Correlation between play_star_rating and star_rating: 0.62
+    Correlation between play_star_rating and val_star_rating: 0.48
+    Correlation between star_rating and val_star_rating: 0.73
 
-In the cell below, display the number of null values contained within each column of our DataFrame.
+
+ 
+
+Note that there is substantial correlation between the `play_star_rating`, `star_rating` and `val_star_rating`. While this could lead to multicollinearity in your eventual regression model, it is too early to clearly determine this at this point. Remember that multicollinearity is a relationship between 3 or more variables while correlation simply investigates the relationship between two variables.
+
+Additionally, these relationships provide an alternative method for imputing missing values: since they appear to be correlated, you could use these features to help impute missing values in the others features. For example, if you are missing the star_rating for a particular row but have the val_star_rating for that same entry, it seems reasonable to assume that it is a good estimate for the missing star_rating value as they are highly correlated. That said, doing so does come with risks; indeed you would be further increasing the correlation between these features which could further provoke multicollinearity in the final model.
+
+Investigate if you could use one of the other star rating features when one is missing. How many rows have one of `play_star_rating`, `star_rating` and `val_star_rating` missing, but not all three.
 
 
 ```python
+print('Number missing all three:',
+      len(df[(df.play_star_rating.isnull())
+      & (df.star_rating.isnull())
+      & (df.val_star_rating.isnull())])
+     )
+```
+
+    Number missing all three: 1421
+
+
+Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that features median.  
+
+Fill in the missing `review_difficulty` values with 'unknown'.
+
+  
+
+
+```python
+for col in df.columns:
+    try:
+        median = df[col].median()
+        df[col] = df[col].fillna(value=median)
+    except:
+        continue
+df.review_difficulty = df.review_difficulty.fillna('unknown')
 df.isna().sum()
 ```
 
 
 
 
-    Store                    0
-    Dept                     0
-    Date                     0
-    Weekly_Sales             0
-    IsHoliday                0
-    Type                     0
-    Size                     0
-    Temperature              0
-    Fuel_Price               0
-    MarkDown1            62826
-    MarkDown2            70607
-    MarkDown3            65326
-    MarkDown4            63354
-    MarkDown5            62826
-    CPI                      0
-    Unemployment             0
-    binned_markdown_1        0
-    binned_markdown_2        0
-    binned_markdown_3        0
-    binned_markdown_4        0
-    binned_markdown_5        0
+    prod_id                0
+    ages                   0
+    piece_count            0
+    set_name               0
+    prod_desc            358
+    prod_long_desc         0
+    theme_name             0
+    country                0
+    list_price             0
+    num_reviews            0
+    play_star_rating       0
+    review_difficulty      0
+    star_rating            0
+    val_star_rating        0
     dtype: int64
-
-
-
-Excellent! You've now dealt with all the null values in the dataset through **_Coarse Classification_** by binning the data and treating null values as a distinct category. All that's left to do is to drop our original `MarkDown` columns from the DataFrame. 
-
-Note that in this step, you'll also drop the `Date` column, because you are going to build a generalized model and will not be making use of any time series data. 
-
-In the cell below:
-
-* Create a list called `to_drop` that contains the name of every `MarkDown` column you need to drop (for a challenge, try doing this with a list comprehension!)
-* Append `"Date"` to `to_drop`
-* Drop these columns (in place) from the DataFrame
-* Display the number of null values in each column again to confirm that these columns have been dropped, and that the DataFrame now contains no missing values
-
-
-
-```python
-to_drop = ["MarkDown" + str(i) for i in range (1,6)]
-to_drop.append("Date")
-df.drop(to_drop, axis=1, inplace=True)
-df.isna().sum()
-```
-
-
-
-
-    Store                0
-    Dept                 0
-    Weekly_Sales         0
-    IsHoliday            0
-    Type                 0
-    Size                 0
-    Temperature          0
-    Fuel_Price           0
-    CPI                  0
-    Unemployment         0
-    binned_markdown_1    0
-    binned_markdown_2    0
-    binned_markdown_3    0
-    binned_markdown_4    0
-    binned_markdown_5    0
-    dtype: int64
-
-
-
-### Checking for Multicollinearity
-
-
-Before you one-hot encode the categorical columns usin `pd.get_dummies()`, you'll want to quickly check the dataset for multicollinearity, since this can severly impact model stability and interpretability.  You want to make sure that the columns within the dataset are not highly correlated. 
-
-A good way to check for multicollinearity between features is to create a correlation heatmap.
-
-The [seaborn documentation](https://seaborn.pydata.org/examples/many_pairwise_correlations.html) provides some great code samples to help you figure out how to display a Correlation Heatmap.  
-
-Check out this documentation, and then modify the code included below so that it displays a Correlation Heatmap for your dataset below.
-
-
-```python
-# Set the style of the visualization
-sns.set(style="white")
-
-# Create a covariance matrix
-corr = df.corr()
-
-# Generate a mask the size of our covariance matrix
-mask = np.zeros_like(corr, dtype=np.bool)
-mask[np.triu_indices_from(mask)] = True
-
-# Set up the matplotlib figure
-f, ax = plt.subplots(figsize=(11, 9))
-
-# Generate a custom diverging colormap
-cmap = sns.diverging_palette(220, 10, as_cmap=True)
-
-# Draw the heatmap with the mask and correct aspect ratio
-sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
-            square=True, linewidths=.5, cbar_kws={"shrink": .5})
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a1b3cafd0>
-
-
-
-
-![png](index_files/index_40_1.png)
-
-
-Interpret the Correlation Heatmap you created above to answer the following questions:
-
-Which columns are highly correlated with the target column our model will predict?  Are any of our predictor columns highly correlated enough that we should consider dropping them?  Explain your answer.
-
-Write your answer below this line:
-________________________________________________________________________________________________________________________________
 
 
 
@@ -749,29 +546,168 @@ ________________________________________________________________________________
 
 Now, you'll need to convert all of our numeric columns to the same scale by **_normalizing_** our dataset.  Recall that you normalize a dataset by converting each numeric value to it's corresponding z-score for the column, which is obtained by subtracting the column's mean and then dividing by the column's standard deviation for every value. 
 
-Since you only have 4 columns containing numeric data that needs to be normalized, you can do this by hand in the cell below. This avoids errors that stem from trying to normalize datasets that contain strings in all of our categorical columns. Plus, it's good practice to help remember how normalization works!
 
 In the cell below:
 
-* Normalize the following columns individually: `Size`, `Temperature`, `Fuel_Price`, `CPI`, and `Unemployment` by subtracting the column mean and dividing by the column standard deviation. 
+* Normalize the numeric X features by subtracting the column mean and dividing by the column standard deviation. 
+(Don't bother to normalize the list_price as this is the feature you will be predicting.)
 
 
 ```python
-df.Size = (df.Size - df.Size.mean()) / df.Size.std()
-df.Temperature = (df.Temperature - df.Temperature.mean()) / df.Temperature.std()
-df.Fuel_Price = (df.Fuel_Price - df.Fuel_Price.mean()) / df.Fuel_Price.std()
-df.CPI = (df.CPI - df.CPI.mean()) / df.CPI.std()
-df.Unemployment = (df.Unemployment - df.Unemployment.mean()) / df.Unemployment.std()
+def norm_feat(series):
+    return (series - series.mean())/series.std()
+for feat in ['piece_count', 'num_reviews', 'play_star_rating', 'star_rating', 'val_star_rating']:
+    df[feat] = norm_feat(df[feat])
+df.describe()
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prod_id</th>
+      <th>piece_count</th>
+      <th>list_price</th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1.087000e+04</td>
+      <td>1.087000e+04</td>
+      <td>10870.000000</td>
+      <td>1.087000e+04</td>
+      <td>1.087000e+04</td>
+      <td>1.087000e+04</td>
+      <td>1.087000e+04</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.181634e+04</td>
+      <td>1.115789e-16</td>
+      <td>67.309137</td>
+      <td>3.132256e-16</td>
+      <td>3.548841e-14</td>
+      <td>2.524610e-13</td>
+      <td>-1.584535e-13</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.736390e+05</td>
+      <td>1.000000e+00</td>
+      <td>94.669414</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>6.300000e+02</td>
+      <td>-6.050659e-01</td>
+      <td>2.272400</td>
+      <td>-4.264402e-01</td>
+      <td>-5.883334e+00</td>
+      <td>-5.641909e+00</td>
+      <td>-5.193413e+00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.112300e+04</td>
+      <td>-4.895715e-01</td>
+      <td>21.899000</td>
+      <td>-3.705846e-01</td>
+      <td>-4.810100e-01</td>
+      <td>-4.602216e-01</td>
+      <td>-3.650101e-01</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>4.207350e+04</td>
+      <td>-3.379852e-01</td>
+      <td>36.587800</td>
+      <td>-2.868011e-01</td>
+      <td>2.160641e-01</td>
+      <td>1.615809e-01</td>
+      <td>1.178302e-01</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7.124800e+04</td>
+      <td>6.263593e-02</td>
+      <td>73.187800</td>
+      <td>-1.192341e-01</td>
+      <td>5.646012e-01</td>
+      <td>7.833834e-01</td>
+      <td>6.006705e-01</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.000431e+06</td>
+      <td>8.466055e+00</td>
+      <td>1104.870000</td>
+      <td>9.795146e+00</td>
+      <td>1.087407e+00</td>
+      <td>9.906510e-01</td>
+      <td>1.244458e+00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+df.columns
+```
+
+
+
+
+    Index(['prod_id', 'ages', 'piece_count', 'set_name', 'prod_desc',
+           'prod_long_desc', 'theme_name', 'country', 'list_price', 'num_reviews',
+           'play_star_rating', 'review_difficulty', 'star_rating',
+           'val_star_rating'],
+          dtype='object')
+
+
 
 ## One-Hot Encoding Categorical Columns
 
 As a final step, you'll need to deal with the categorical columns by **_one-hot encoding_** them into binary variables via the `pd.get_dummies()` method.  
 
-In the cell below, use the [`pd.get_dummies()`](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) to one-hot encode the dataset.
+When doing this, you should also subset to appropriate features. If you were to simply pass the entire DataFrame to the `pd.get_dummies()` method as it stands now, then you would end up with unique features for every single product description! (Presumably the descriptions are unique.) As such, you should first subset to the numeric features that you will eventually use in a model along with categorical variables that are not unique.
+
+In the cell below, subset to the appropriate predictive features and then use the [`pd.get_dummies()`](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) to one-hot encode the dataset.
 
 
 ```python
+feats = ['ages', 'piece_count', 'theme_name', 'country', 'list_price', 'num_reviews',
+         'play_star_rating', 'review_difficulty', 'star_rating', 'val_star_rating']
+#Don't include prod_id, set_name, prod_desc, or prod_long_desc; they are too unique
+df = df[feats]
 df = pd.get_dummies(df)
 ```
 
@@ -801,40 +737,40 @@ df.head()
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Weekly_Sales</th>
-      <th>IsHoliday</th>
-      <th>Size</th>
-      <th>Temperature</th>
-      <th>Fuel_Price</th>
-      <th>CPI</th>
-      <th>Unemployment</th>
-      <th>Store_1</th>
-      <th>Store_10</th>
-      <th>Store_2</th>
+      <th>piece_count</th>
+      <th>list_price</th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
+      <th>ages_10+</th>
+      <th>ages_10-14</th>
+      <th>ages_10-16</th>
+      <th>ages_10-21</th>
       <th>...</th>
-      <th>binned_markdown_4_41-60%</th>
-      <th>binned_markdown_4_61-80%</th>
-      <th>binned_markdown_4_81-100%</th>
-      <th>binned_markdown_4_NaN</th>
-      <th>binned_markdown_5_0-20%</th>
-      <th>binned_markdown_5_21-40%</th>
-      <th>binned_markdown_5_41-60%</th>
-      <th>binned_markdown_5_61-80%</th>
-      <th>binned_markdown_5_81-100%</th>
-      <th>binned_markdown_5_NaN</th>
+      <th>country_NZ</th>
+      <th>country_PL</th>
+      <th>country_PT</th>
+      <th>country_US</th>
+      <th>review_difficulty_Average</th>
+      <th>review_difficulty_Challenging</th>
+      <th>review_difficulty_Easy</th>
+      <th>review_difficulty_Very Challenging</th>
+      <th>review_difficulty_Very Easy</th>
+      <th>review_difficulty_unknown</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>24924.50</td>
-      <td>False</td>
-      <td>0.283436</td>
-      <td>-1.301205</td>
-      <td>-1.56024</td>
-      <td>0.40349</td>
-      <td>0.913194</td>
-      <td>1</td>
+      <td>-0.273020</td>
+      <td>29.99</td>
+      <td>-0.398512</td>
+      <td>-0.655279</td>
+      <td>-0.045687</td>
+      <td>-0.365010</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>...</td>
@@ -842,23 +778,23 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>50605.27</td>
-      <td>False</td>
-      <td>0.283436</td>
-      <td>-1.301205</td>
-      <td>-1.56024</td>
-      <td>0.40349</td>
-      <td>0.913194</td>
-      <td>1</td>
+      <td>-0.404154</td>
+      <td>19.99</td>
+      <td>-0.398512</td>
+      <td>-0.655279</td>
+      <td>0.990651</td>
+      <td>-0.365010</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>...</td>
@@ -868,21 +804,21 @@ df.head()
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>13740.12</td>
-      <td>False</td>
-      <td>0.283436</td>
-      <td>-1.301205</td>
-      <td>-1.56024</td>
-      <td>0.40349</td>
-      <td>0.913194</td>
-      <td>1</td>
+      <td>-0.517242</td>
+      <td>12.99</td>
+      <td>-0.147162</td>
+      <td>-0.132473</td>
+      <td>-0.460222</td>
+      <td>-0.204063</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>...</td>
@@ -892,21 +828,21 @@ df.head()
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>39954.04</td>
-      <td>False</td>
-      <td>0.283436</td>
-      <td>-1.301205</td>
-      <td>-1.56024</td>
-      <td>0.40349</td>
-      <td>0.913194</td>
-      <td>1</td>
+      <td>0.635296</td>
+      <td>99.99</td>
+      <td>0.187972</td>
+      <td>-1.352353</td>
+      <td>0.161581</td>
+      <td>0.117830</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>...</td>
@@ -914,23 +850,23 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>32229.38</td>
-      <td>False</td>
-      <td>0.283436</td>
-      <td>-1.301205</td>
-      <td>-1.56024</td>
-      <td>0.40349</td>
-      <td>0.913194</td>
-      <td>1</td>
+      <td>0.288812</td>
+      <td>79.99</td>
+      <td>-0.063378</td>
+      <td>-2.049427</td>
+      <td>0.161581</td>
+      <td>-0.204063</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>...</td>
@@ -939,22 +875,22 @@ df.head()
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 127 columns</p>
+<p>5 rows × 103 columns</p>
 </div>
 
 
 
 
 ```python
-df.to_csv("walmart_dataset_cleaned.csv", index=False)
+df.to_csv("Lego_dataset_cleaned.csv", index=False)
 ```
 
 That's it! You've now successfully scrubbed your dataset--you're now ready for data exploration and modeling!
