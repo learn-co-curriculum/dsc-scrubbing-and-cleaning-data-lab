@@ -175,8 +175,6 @@ df.head()
 
 
 
- 
-
 
 ```python
 len(df)
@@ -188,8 +186,6 @@ len(df)
     10870
 
 
-
-  
 
 ## Starting our Data Cleaning
 
@@ -260,10 +256,6 @@ df.list_price.unique()[:5]
 
 
 
- 
-
- 
-
 
 ```python
 df.info() #Note that list_price is now a float object
@@ -321,8 +313,6 @@ df.isna().sum() #Could also simply recheck df.info() above which states the numb
     dtype: int64
 
 
-
-  
 
 Now, get some descriptive statistics for each of the columns. You want to see where the minimum and maximum values lie.  
 
@@ -465,8 +455,9 @@ import itertools
 
 
 ```python
-#Investigate whether multicollinearity exists between the review features 
-#(num_reviews, play_star_rating, star_rating, val_star_rating)
+# Investigate whether multicollinearity exists between the review features 
+# (num_reviews, play_star_rating, star_rating, val_star_rating)
+feats = ['num_reviews', 'play_star_rating', 'star_rating', 'val_star_rating']
 for combo in itertools.combinations(feats, 2):
     x = combo[0]
     y = combo[1]
@@ -506,8 +497,6 @@ print('Number missing all three:',
 Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that features median.  
 
 Fill in the missing `review_difficulty` values with 'unknown'.
-
-  
 
 
 ```python
@@ -693,6 +682,15 @@ df.columns
           dtype='object')
 
 
+
+## Saving Your Results
+
+While you'll once again practice one-hot encoding as you would to preprocess data before fitting a model, saving such a reperesentation of the data will eat up additional disk space. After all, a categorical variable with 10 bins will be transformed to 10 seperate features when passed through `pd.get_dummies()`. As such, while the further practice is worthwhile, save your DataFrame as is for now.
+
+
+```python
+df.to_csv("Lego_dataset_cleaned.csv", index=False)
+```
 
 ## One-Hot Encoding Categorical Columns
 
@@ -887,11 +885,6 @@ df.head()
 </div>
 
 
-
-
-```python
-df.to_csv("Lego_dataset_cleaned.csv", index=False)
-```
 
 That's it! You've now successfully scrubbed your dataset--you're now ready for data exploration and modeling!
 
