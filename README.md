@@ -39,10 +39,6 @@ In the cells below:
 # Now, load in the dataset and inspect the head to make sure everything loaded correctly
 ```
 
- 
-
-  
-
 ## Starting our Data Cleaning
 
 To start, you'll deal with the most obvious issue: data features with the wrong data encoding.
@@ -53,14 +49,14 @@ In the cell below, use the appropriate method to check the data type of each col
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 Now, investigate some of the unique values inside of the `list_price` column.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 ### Numerical Data Stored as Strings
@@ -71,7 +67,7 @@ A common issue to check for at this stage is numeric columns that have accidenta
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 ### Detecting and Dealing With Null Values
@@ -82,7 +78,7 @@ In the cell below, get a count of how many null values exist in each column in t
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -110,7 +106,7 @@ Now, get some descriptive statistics for each of the columns. You want to see wh
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 Now that you have a bit more of a understanding of each of these features you can now make an informed decision about the best strategy for dealing with the various null values. 
@@ -125,8 +121,8 @@ Given that most of the features with null values concern user reviews of the leg
 
 
 ```python
-#Investigate whether multicollinearity exists between the review features 
-#(num_reviews, play_star_rating, star_rating, val_star_rating)
+# Investigate whether multicollinearity exists between the review features 
+# (num_reviews, play_star_rating, star_rating, val_star_rating)
 ```
 
  
@@ -139,7 +135,8 @@ Investigate if you could use one of the other star rating features when one is m
 
 
 ```python
-#Your code here
+# Your code here
+# Number missing all three: 1421
 ```
 
 Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that features median.  
@@ -148,7 +145,7 @@ Fill in the missing `review_difficulty` values with 'unknown'.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 ## Normalizing the Data
@@ -160,6 +157,15 @@ In the cell below:
 
 * Normalize the numeric X features by subtracting the column mean and dividing by the column standard deviation. 
 (Don't bother to normalize the list_price as this is the feature you will be predicting.)
+
+
+```python
+# Your code here
+```
+
+## Saving Your Results
+
+While you'll once again practice one-hot encoding as you would to preprocess data before fitting a model, saving such a reperesentation of the data will eat up additional disk space. After all, a categorical variable with 10 bins will be transformed to 10 seperate features when passed through `pd.get_dummies()`. As such, while the further practice is worthwhile, save your DataFrame as is for now.
 
 
 ```python
@@ -176,14 +182,7 @@ In the cell below, subset to the appropriate predictive features and then use th
 
 
 ```python
-#Your code here
-```
-
-## Save the Cleaned Dataset
-
-
-```python
-#Your code here
+# Your code here
 ```
 
 That's it! You've now successfully scrubbed your dataset--you're now ready for data exploration and modeling!
