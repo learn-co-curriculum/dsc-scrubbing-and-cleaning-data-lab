@@ -996,10 +996,10 @@ That's it! You've now successfully scrubbed your dataset--you're now ready for d
 
 ## Summary
 
-In this lesson, you learned gain practice with data cleaning by:
+In this lesson, you gained practice with data cleaning by:
 
 * Casting columns to the appropriate data types
-* Identifying and deal with null values appropriately
+* Identifying and dealing with null values appropriately
 * Removing unnecessary columns
-* Checking for and deal with multicollinearity
+* Checking for and dealing with multicollinearity
 * Normalizing your data
