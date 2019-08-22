@@ -450,31 +450,73 @@ Given that most of the features with null values concern user reviews of the leg
 
 
 ```python
-import itertools
-```
-
-
-```python
 # Investigate whether multicollinearity exists between the review features 
 # (num_reviews, play_star_rating, star_rating, val_star_rating)
 feats = ['num_reviews', 'play_star_rating', 'star_rating', 'val_star_rating']
-for combo in itertools.combinations(feats, 2):
-    x = combo[0]
-    y = combo[1]
-    temp = df[(~df[x].isnull())&(~df[y].isnull())]
-    corr = round(np.corrcoef(temp[x],temp[y])[0][1], 2)
-    print("Correlation between {} and {}: {}".format(x,y, corr))
+df[feats].corr()
 ```
 
-    Correlation between num_reviews and play_star_rating: -0.06
-    Correlation between num_reviews and star_rating: 0.0
-    Correlation between num_reviews and val_star_rating: 0.03
-    Correlation between play_star_rating and star_rating: 0.62
-    Correlation between play_star_rating and val_star_rating: 0.48
-    Correlation between star_rating and val_star_rating: 0.73
 
 
- 
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>num_reviews</th>
+      <th>play_star_rating</th>
+      <th>star_rating</th>
+      <th>val_star_rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>num_reviews</th>
+      <td>1.000000</td>
+      <td>-0.060884</td>
+      <td>0.004541</td>
+      <td>0.026664</td>
+    </tr>
+    <tr>
+      <th>play_star_rating</th>
+      <td>-0.060884</td>
+      <td>1.000000</td>
+      <td>0.619246</td>
+      <td>0.484341</td>
+    </tr>
+    <tr>
+      <th>star_rating</th>
+      <td>0.004541</td>
+      <td>0.619246</td>
+      <td>1.000000</td>
+      <td>0.731538</td>
+    </tr>
+    <tr>
+      <th>val_star_rating</th>
+      <td>0.026664</td>
+      <td>0.484341</td>
+      <td>0.731538</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 Note that there is substantial correlation between the `play_star_rating`, `star_rating` and `val_star_rating`. While this could lead to multicollinearity in your eventual regression model, it is too early to clearly determine this at this point. Remember that multicollinearity is a relationship between 3 or more variables while correlation simply investigates the relationship between two variables.
 
@@ -494,7 +536,7 @@ print('Number missing all three:',
     Number missing all three: 1421
 
 
-Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that features median.  
+Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that feature's median.  
 
 Fill in the missing `review_difficulty` values with 'unknown'.
 
@@ -594,12 +636,12 @@ df.describe()
     <tr>
       <th>mean</th>
       <td>6.181634e+04</td>
-      <td>1.115789e-16</td>
+      <td>8.497751e-18</td>
       <td>67.309137</td>
-      <td>3.132256e-16</td>
-      <td>3.548841e-14</td>
-      <td>2.524610e-13</td>
-      <td>-1.584535e-13</td>
+      <td>-2.287856e-18</td>
+      <td>1.034111e-15</td>
+      <td>-1.653139e-15</td>
+      <td>2.881882e-16</td>
     </tr>
     <tr>
       <th>std</th>
@@ -696,9 +738,9 @@ df.to_csv("Lego_dataset_cleaned.csv", index=False)
 
 As a final step, you'll need to deal with the categorical columns by **_one-hot encoding_** them into binary variables via the `pd.get_dummies()` method.  
 
-When doing this, you should also subset to appropriate features. If you were to simply pass the entire DataFrame to the `pd.get_dummies()` method as it stands now, then you would end up with unique features for every single product description! (Presumably the descriptions are unique.) As such, you should first subset to the numeric features that you will eventually use in a model along with categorical variables that are not unique.
+When doing this, you may also need to subset the appropriate features to avoid encoding the wrong data. The `get_dummies()` method by default converts all columns with *object* or *category* dtype. However, you should always check the result of calling `get_dummies()` to ensure that only the categorical variables have been transformed. Consult the [documentation](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) for more details. If you are ever unsure of the dtypes, call `df.info()`.
 
-In the cell below, subset to the appropriate predictive features and then use the [`pd.get_dummies()`](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) to one-hot encode the dataset.
+In the cell below, subset to the appropriate predictive features and then use the `pd.get_dummies()` to one-hot encode the dataset properly.
 
 
 ```python
@@ -706,7 +748,7 @@ feats = ['ages', 'piece_count', 'theme_name', 'country', 'list_price', 'num_revi
          'play_star_rating', 'review_difficulty', 'star_rating', 'val_star_rating']
 #Don't include prod_id, set_name, prod_desc, or prod_long_desc; they are too unique
 df = df[feats]
-df = pd.get_dummies(df)
+df = pd.get_dummies(df, drop_first=True)
 ```
 
 
@@ -741,16 +783,16 @@ df.head()
       <th>play_star_rating</th>
       <th>star_rating</th>
       <th>val_star_rating</th>
-      <th>ages_10+</th>
       <th>ages_10-14</th>
       <th>ages_10-16</th>
       <th>ages_10-21</th>
+      <th>ages_11-16</th>
       <th>...</th>
+      <th>country_NO</th>
       <th>country_NZ</th>
       <th>country_PL</th>
       <th>country_PT</th>
       <th>country_US</th>
-      <th>review_difficulty_Average</th>
       <th>review_difficulty_Challenging</th>
       <th>review_difficulty_Easy</th>
       <th>review_difficulty_Very Challenging</th>
@@ -775,7 +817,7 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -799,8 +841,8 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -823,8 +865,8 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -847,7 +889,7 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -871,8 +913,8 @@ df.head()
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -881,7 +923,7 @@ df.head()
     </tr>
   </tbody>
 </table>
-<p>5 rows × 103 columns</p>
+<p>5 rows × 99 columns</p>
 </div>
 
 
