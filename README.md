@@ -81,27 +81,6 @@ In the cell below, get a count of how many null values exist in each column in t
 # Your code here
 ```
 
-
-
-
-    prod_id                 0
-    ages                    0
-    piece_count             0
-    set_name                0
-    prod_desc             358
-    prod_long_desc          0
-    theme_name              0
-    country                 0
-    list_price              0
-    num_reviews          1421
-    play_star_rating     1549
-    review_difficulty    1766
-    star_rating          1421
-    val_star_rating      1569
-    dtype: int64
-
-
-
 Now, get some descriptive statistics for each of the columns. You want to see where the minimum and maximum values lie.  
 
 
@@ -125,8 +104,6 @@ Given that most of the features with null values concern user reviews of the leg
 # (num_reviews, play_star_rating, star_rating, val_star_rating)
 ```
 
- 
-
 Note that there is substantial correlation between the `play_star_rating`, `star_rating` and `val_star_rating`. While this could lead to multicollinearity in your eventual regression model, it is too early to clearly determine this at this point. Remember that multicollinearity is a relationship between 3 or more variables while correlation simply investigates the relationship between two variables.
 
 Additionally, these relationships provide an alternative method for imputing missing values: since they appear to be correlated, you could use these features to help impute missing values in the others features. For example, if you are missing the star_rating for a particular row but have the val_star_rating for that same entry, it seems reasonable to assume that it is a good estimate for the missing star_rating value as they are highly correlated. That said, doing so does come with risks; indeed you would be further increasing the correlation between these features which could further provoke multicollinearity in the final model.
@@ -139,7 +116,7 @@ Investigate if you could use one of the other star rating features when one is m
 # Number missing all three: 1421
 ```
 
-Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that features median.  
+Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that feature's median.  
 
 Fill in the missing `review_difficulty` values with 'unknown'.
 
@@ -176,9 +153,9 @@ While you'll once again practice one-hot encoding as you would to preprocess dat
 
 As a final step, you'll need to deal with the categorical columns by **_one-hot encoding_** them into binary variables via the `pd.get_dummies()` method.  
 
-When doing this, you should also subset to appropriate features. If you were to simply pass the entire DataFrame to the `pd.get_dummies()` method as it stands now, then you would end up with unique features for every single product description! (Presumably the descriptions are unique.) As such, you should first subset to the numeric features that you will eventually use in a model along with categorical variables that are not unique.
+When doing this, you may also need to subset the appropriate features to avoid encoding the wrong data. The `get_dummies()` method by default converts all columns with *object* or *category* dtype. However, you should always check the result of calling `get_dummies()` to ensure that only the categorical variables have been transformed. Consult the [documentation](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) for more details. If you are ever unsure of the dtypes, call `df.info()`.
 
-In the cell below, subset to the appropriate predictive features and then use the [`pd.get_dummies()`](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) to one-hot encode the dataset.
+In the cell below, subset to the appropriate predictive features and then use the `pd.get_dummies()` to one-hot encode the dataset properly.
 
 
 ```python
