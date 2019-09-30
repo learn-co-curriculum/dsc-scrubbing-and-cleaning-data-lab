@@ -17,17 +17,17 @@ You will be able to:
 
 ## Getting Started
 
-You'll find the resulting dataset from our work in the _Obtaining Data_ Lab stored within the file `walmart_data_not_cleaned.csv`.  
+You'll find the resulting dataset from your work in the _Obtaining Data_ Lab stored within the file `'Lego_data_merged.csv'`.  
 
 In the cells below:
 
-* Import pandas and set the standard alias
-* Import numpy and set the standard alias
-* Import matplotlib.pyplot and set the standard alias
-* Import seaborn and set the alias `sns` (this is the standard alias for seaborn)
-* Use the ipython magic command to set all matplotlib visualizations to display inline in the notebook
-* Load the dataset stored in the .csv file into a DataFrame using pandas
-* Inspect the head of the DataFrame to ensure everything loaded correctly
+* Import `pandas` and set the standard alias. 
+* Import `numpy` and set the standard alias. 
+* Import `matplotlib.pyplot` and set the standard alias. 
+* Import `seaborn` and set the alias `sns` (this is the standard alias for seaborn). 
+* Use the ipython magic command to set all matplotlib visualizations to display inline in the notebook. 
+* Load the dataset stored in the `'Lego_data_merged.csv'` file into a DataFrame, `df`. 
+* Inspect the head of the DataFrame to ensure everything loaded correctly. 
 
 
 ```python
@@ -54,7 +54,7 @@ import matplotlib.pyplot as plt
 ```python
 # __SOLUTION__ 
 # Now, load in the dataset and inspect the head to make sure everything loaded correctly
-df = pd.read_csv("Lego_data_merged.csv")
+df = pd.read_csv('Lego_data_merged.csv')
 df.head()
 ```
 
@@ -184,19 +184,6 @@ df.head()
   </tbody>
 </table>
 </div>
-
-
-
-
-```python
-# __SOLUTION__ 
-len(df)
-```
-
-
-
-
-    10870
 
 
 
@@ -482,7 +469,7 @@ df.describe()
 
 
 
-Now that you have a bit more of a understanding of each of these features you can now make an informed decision about the best strategy for dealing with the various null values. 
+Now that you have a bit more of a understanding of each of these features you can make an informed decision about the best strategy for dealing with the various null values. 
 
 Some common strategies for filling null values include:
 * Using the mean of the feature
@@ -571,7 +558,7 @@ df[feats].corr()
 
 Note that there is substantial correlation between the `play_star_rating`, `star_rating` and `val_star_rating`. While this could lead to multicollinearity in your eventual regression model, it is too early to clearly determine this at this point. Remember that multicollinearity is a relationship between 3 or more variables while correlation simply investigates the relationship between two variables.
 
-Additionally, these relationships provide an alternative method for imputing missing values: since they appear to be correlated, you could use these features to help impute missing values in the others features. For example, if you are missing the star_rating for a particular row but have the val_star_rating for that same entry, it seems reasonable to assume that it is a good estimate for the missing star_rating value as they are highly correlated. That said, doing so does come with risks; indeed you would be further increasing the correlation between these features which could further provoke multicollinearity in the final model.
+Additionally, these relationships provide an alternative method for imputing missing values: since they appear to be correlated, you could use these features to help impute missing values in the others features. For example, if you are missing the `star_rating` for a particular row but have the `val_star_rating` for that same entry, it seems reasonable to assume that it is a good estimate for the missing `star_rating` value as they are highly correlated. That said, doing so does come with risks; indeed you would be further increasing the correlation between these features which could further provoke multicollinearity in the final model.
 
 Investigate if you could use one of the other star rating features when one is missing. How many rows have one of `play_star_rating`, `star_rating` and `val_star_rating` missing, but not all three.
 
@@ -594,9 +581,7 @@ print('Number missing all three:',
     Number missing all three: 1421
 
 
-Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that feature's median.  
-
-Fill in the missing `review_difficulty` values with 'unknown'.
+Well, it seems like when one is missing, the other two are also apt to be missing. While this has been a bit of an extended investigation, simply go ahead and fill the missing values with that feature's median. Fill in the missing values of `review_difficulty` feature  with string `'unknown'`.
 
 
 ```python
@@ -645,7 +630,7 @@ Now, you'll need to convert all of our numeric columns to the same scale by **_n
 In the cell below:
 
 * Normalize the numeric X features by subtracting the column mean and dividing by the column standard deviation. 
-(Don't bother to normalize the list_price as this is the feature you will be predicting.)
+(Don't bother to normalize the `list_price` as this is the feature you will be predicting.)
 
 
 ```python
@@ -798,11 +783,11 @@ df.columns
 
 ## Saving Your Results
 
-While you'll once again practice one-hot encoding as you would to preprocess data before fitting a model, saving such a reperesentation of the data will eat up additional disk space. After all, a categorical variable with 10 bins will be transformed to 10 seperate features when passed through `pd.get_dummies()`. As such, while the further practice is worthwhile, save your DataFrame as is for now.
+While you'll once again practice one-hot encoding as you would to preprocess data before fitting a model, saving such a reperesentation of the data will eat up additional disk space. After all, a categorical variable with 10 bins will be transformed to 10 seperate features when passed through `pd.get_dummies()`. As such, while further practice is worthwhile, save your DataFrame as is for now.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -813,11 +798,11 @@ df.to_csv("Lego_dataset_cleaned.csv", index=False)
 
 ## One-Hot Encoding Categorical Columns
 
-As a final step, you'll need to deal with the categorical columns by **_one-hot encoding_** them into binary variables via the `pd.get_dummies()` method.  
+As a final step, you'll need to deal with the categorical columns by **_one-hot encoding_** them into binary variables via the `pd.get_dummies()` function.  
 
-When doing this, you may also need to subset the appropriate features to avoid encoding the wrong data. The `get_dummies()` method by default converts all columns with *object* or *category* dtype. However, you should always check the result of calling `get_dummies()` to ensure that only the categorical variables have been transformed. Consult the [documentation](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) for more details. If you are ever unsure of the dtypes, call `df.info()`.
+When doing this, you may also need to subset the appropriate features to avoid encoding the wrong data. The `get_dummies()` function by default converts all columns with *object* or *category* dtype. However, you should always check the result of calling `get_dummies()` to ensure that only the categorical variables have been transformed. Consult the [documentation](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html) for more details. If you are ever unsure of the data types, call the `.info()` method.
 
-In the cell below, subset to the appropriate predictive features and then use the `pd.get_dummies()` to one-hot encode the dataset properly.
+In the cell below, subset to the appropriate predictive features and then use `pd.get_dummies()` to one-hot encode the dataset properly.
 
 
 ```python
@@ -1012,7 +997,7 @@ df.head()
 
 
 
-That's it! You've now successfully scrubbed your dataset--you're now ready for data exploration and modeling!
+That's it! You've now successfully scrubbed your dataset -- you're now ready for data exploration and modeling!
 
 ## Summary
 
