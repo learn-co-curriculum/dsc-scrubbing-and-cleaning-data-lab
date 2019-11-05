@@ -9,10 +9,9 @@ In the previous labs, you joined the data from our separate files into a single 
 
 You will be able to:
 
-* Cast columns to the appropriate data types
+* Perform the full data cleaning process for a dataset
 * Identify and deal with null values appropriately
 * Remove unnecessary columns
-* Understand how to normalize data
 
 
 ## Getting Started
@@ -713,7 +712,7 @@ df.columns
 
 ## Saving Your Results
 
-While you'll once again practice one-hot encoding as you would to preprocess data before fitting a model, saving such a reperesentation of the data will eat up additional disk space. After all, a categorical variable with 10 bins will be transformed to 10 seperate features when passed through `pd.get_dummies()`. As such, while further practice is worthwhile, save your DataFrame as is for now.
+While you'll once again practice one-hot encoding as you would to preprocess data before fitting a model, saving such a reperesentation of the data will eat up additional disk space. After all, a categorical variable with 10 bins will be transformed to 10 seperate features when passed through `pd.get_dummies()`. As such, while further practice is worthwhile, save your DataFrame as-is for now.
 
 
 ```python
@@ -918,10 +917,4 @@ That's it! You've now successfully scrubbed your dataset -- you're now ready for
 
 ## Summary
 
-In this lesson, you gained practice with data cleaning by:
-
-* Casting columns to the appropriate data types
-* Identifying and dealing with null values appropriately
-* Removing unnecessary columns
-* Checking for and dealing with multicollinearity
-* Normalizing your data
+In this lesson, you gained practice with scrubbing and cleaning data. Specifically, you addressed an incorrect data type, detected and dealt with null values, checked for multicollinearity, and transformed data. Congrats on performing the full data cleaning process for a dataset!
